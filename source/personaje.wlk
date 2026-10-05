@@ -8,21 +8,29 @@ object personaje {
 
     method arriba() {
         imagenActual = "robert\\jugador-robert-norte-chiquito.png"
-        position = position.up(1)
+        if (position.y() < game.height() - 1) {
+            position = position.up(1)
+        }
     }
 
     method abajo() {
         imagenActual = "robert\\jugador-robert-sur-chiquito.png"
-        position = position.down(1)
+        if (position.y() > 0) {
+            position = position.down(1)
+        }
     }
 
     method derecha() {
         imagenActual = "robert\\jugador-robert-oeste-chiquito.png"
-        position = position.right(1)
+        if (position.x() < game.width() - 1) {
+            position = position.right(1)
+        }
     }
 
     method izquierda() {
         imagenActual = "robert\\jugador-robert-este-chiquito.png"
-        position = position.left(1)
+        if (position.x() > 0) {
+            position = position.left(1)
+        }
     }
 }
