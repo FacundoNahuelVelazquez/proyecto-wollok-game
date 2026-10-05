@@ -30,27 +30,30 @@ Juego 1: Lluvia de cartas.
 
         El enemigo principal estará lanzando las cartas desde arriba.
 
-        El protagonista irá acumulando dinero a medida que pase el tiempo, llegando al límite de dinero que se pueda ganar en el juego al terminar el tiempo de juego. Ejemplo: Duración: 30 segundos
-                                  Dinero inicial de la partida: $100
-                                  Cada segundo sobrevivido: +$10
-                                  Carta normal: -$25
-                                  Carta rápida: -$50
-                                  Máximo que puede obtener: $400
+        El protagonista irá acumulando dinero a medida que pase el tiempo, llegando al límite de dinero que se pueda ganar en el juego al terminar el tiempo de juego.
+        Ejemplo -> Duración: 30 segundos
+        Dinero inicial de la partida: $100
+        Cada segundo sobrevivido: +$10
+        Carta normal: -$25
+        Carta rápida: -$50
+        Máximo que puede obtener: $400
 
 
 Juego 2: Dado de la suerte.
 
         Este juego trata de lanzar un dado y apostar al resultado que saldrá en diferentes posibles rangos.
 
-        Se podrá elegir una de las siguientes opciones: 1. Un número específico desde 1 al 6.
-                                                        2. Si es par o impar.
-                                                        3. Si es mayor a 3.
-                                                        4. Si es menor/igual a 3.
+        Se podrá elegir una de las siguientes opciones: 
+        1. Un número específico desde 1 al 6.
+        2. Si es par o impar.
+        3. Si es mayor a 3.
+        4. Si es menor/igual a 3.
                                                 
-        El protagonista obtendrá dinero dependiendo de si sale su opción elegida o no, y dependiendo de cuál opción sea, es la cantidad de dinero obtenido; 1. X5 de dinero.
-                  2. X1.8 de dinero.
-                  3. X1.8 de dinero.
-                  4. X1.8 de dinero.
+        El protagonista obtendrá dinero dependiendo de si sale su opción elegida o no, y dependiendo de cuál opción sea, es la cantidad de dinero obtenido; 
+        1. X5 de dinero.
+        2. X1.8 de dinero.
+        3. X1.8 de dinero.
+        4. X1.8 de dinero.
 
 
 Juego 3: Sigue el vaso.
@@ -65,5 +68,3 @@ Juego 3: Sigue el vaso.
 ## Otros
 
 - Curso/Facultad: UNAHUR - Universidad Nacional de Hurlingham
-- Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
