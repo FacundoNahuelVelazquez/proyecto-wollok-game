@@ -1,30 +1,16 @@
 import wollok.game.*
 import personaje.*
+import pantallaDeInicio.*
+import juego.*
 
-program juego {
 
-    game.width(16)
-    game.height(12)
-    game.cellSize(50)
 
-    game.boardGround("casino\\casino-tablero.png")
-    game.addVisual(personaje)
+program Casino {
 
-    keyboard.w().onPressDo {
-        personaje.arriba()
-    }
+    juego.iniciar()
 
-    keyboard.s().onPressDo {
-        personaje.abajo()
-    }
 
-    keyboard.d().onPressDo {
-        personaje.derecha()
-    }
 
-    keyboard.a().onPressDo {
-        personaje.izquierda()
-    }
 
-    game.start()
+    
 }

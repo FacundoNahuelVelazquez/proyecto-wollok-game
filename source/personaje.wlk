@@ -1,6 +1,7 @@
 import wollok.game.*
 
 object personaje {
+    
     var property position = game.origin()
     var imagenActual = "robert\\jugador-robert-sur-chiquito.png"
 
@@ -33,4 +34,8 @@ object personaje {
             position = position.left(1)
         }
     }
+
+
+    
+
 }
