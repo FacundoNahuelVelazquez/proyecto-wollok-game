@@ -2,6 +2,7 @@
 import wollok.game.*
 import personaje.*
 import pantallaDeInicio.*
+import escenarios.*
 import teclado.*
 import musica.*
 
@@ -15,10 +16,13 @@ object juego {
         game.title("casino")
         musica.iniciar()
 
-        game.boardGround("casino\\casino-tablero.png")
         game.addVisual(personaje)
         teclado.moverPersonaje.mover()
+        self.irA(escenarioCasino)
         game.start()
     }
 
+    method irA(escenario) {
+        escenario.cargar()
+    }
 }

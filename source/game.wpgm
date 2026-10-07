@@ -2,6 +2,7 @@ import wollok.game.*
 import personaje.*
 import pantallaDeInicio.*
 import juego.*
+import obstaculos.*
 
 
 
@@ -9,8 +10,4 @@ program Casino {
 
     juego.iniciar()
 
-
-
-
-    
 }
