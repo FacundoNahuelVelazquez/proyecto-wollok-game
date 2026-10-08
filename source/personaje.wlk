@@ -19,7 +19,7 @@ object personaje {
     }
 
     method arriba() {
-        imagenActual = "mini-jefe-crupier\\crupier-mini-jefe-chiquito.png"
+        imagenActual = "robert\\jugador-robert-norte-chiquito.png"
         self.moverA(position.up(1))
     }
 
