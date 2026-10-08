@@ -19,7 +19,7 @@ object personaje {
     }
 
     method arriba() {
-        imagenActual = "robert\\jugador-robert-norte-chiquito.png"
+        imagenActual = "mini-jefe-crupier\\crupier-mini-jefe-chiquito.png"
         self.moverA(position.up(1))
     }
 
@@ -29,12 +29,12 @@ object personaje {
     }
 
     method derecha() {
-        imagenActual = "robert\\jugador-robert-oeste-chiquito.png"
+        imagenActual = "robert\\jugador-robert-este-chiquito.png"
         self.moverA(position.right(1))
     }
 
     method izquierda() {
-        imagenActual = "robert\\jugador-robert-este-chiquito.png"
+        imagenActual = "robert\\jugador-robert-oeste-chiquito.png"
         self.moverA(position.left(1))
     }
 }
