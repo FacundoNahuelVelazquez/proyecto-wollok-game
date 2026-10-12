@@ -10,7 +10,7 @@ import wollok.game.*
 
 object casino {
 
-    method image() = "casino\\casino-poster-game-inicio1.png"
+    method image() = "casino\\casino-poster-game-inicio.png"
 
     method position() = game.origin()
 }
