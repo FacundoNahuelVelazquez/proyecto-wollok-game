@@ -1,9 +1,16 @@
 import wollok.game.*
-import obstaculos.*
+
+// object casino {
+//     method cargar() {
+//         game.boardGround("casino\\casino-poster-game.png")
+//         obstaculos.limpiar()
+//     }
+// }
+
 
 object casino {
-    method cargar() {
-        game.boardGround("casino\\casino-poster-game.png")
-        obstaculos.limpiar()
-    }
+
+    method image() = "casino\\casino-poster-game.png"
+
+    method position() = game.origin()
 }
