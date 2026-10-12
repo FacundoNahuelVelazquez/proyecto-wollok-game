@@ -1,15 +1,19 @@
 import wollok.game.*
 import obstaculos.*
-import personaje.*
+import juego.*
 
+object fondo {
+    var property image = "casino\\casino-tablero.png"
 
-//obstaculos planteados desde el primer escenario (casino-tablero)
-//a medida que se vayan creando mas escenarios se pueden ir agregando en este archivo
+    method position() = game.origin()
+}
+
 object escenarioCasino {
+    method salidas() = [salidaCasinoADados1]
+
     method cargar() {
-        game.boardGround("casino\\casino-tablero.png")
+        fondo.image("casino\\casino-tablero.png")
         obstaculos.limpiar()
-        personaje.position(game.at(7, 1))
         self.cargarParedes()
         self.cargarMesas()
         self.cargarMaquinitas()
@@ -33,5 +37,35 @@ object escenarioCasino {
     method cargarMaquinitas() {
         obstaculos.bloquearZona(0, 4, 2, 3)
         obstaculos.bloquearZona(11, 15, 2, 3)
+    }
+}
+
+object escenarioDados1 {
+    method salidas() = [salidaDados1ACasino]
+
+    method cargar() {
+        fondo.image("casino\\escenario-dados1.png")
+        obstaculos.limpiar()
+        // acá van los obstaculos.bloquearZona(...) de este mapa
+    }
+}
+
+object salidaCasinoADados1 {
+    const celdas = [game.at(15, 1)]
+
+    method activaEn(pos) = celdas.contains(pos)
+
+    method usar() {
+        juego.irA(escenarioDados1, game.at(1, 1))
+    }
+}
+
+object salidaDados1ACasino {
+    const celdas = [game.at(0, 1)]
+
+    method activaEn(pos) = celdas.contains(pos)
+
+    method usar() {
+        juego.irA(escenarioCasino, game.at(14, 1))
     }
 }

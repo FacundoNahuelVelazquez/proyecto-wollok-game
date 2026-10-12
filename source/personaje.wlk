@@ -1,5 +1,6 @@
 import wollok.game.*
 import obstaculos.*
+import juego.*
 
 object personaje {
 
@@ -12,10 +13,11 @@ object personaje {
         pos.x() >= 0 and pos.x() <= game.width() - 1 and
         pos.y() >= 0 and pos.y() <= game.height() - 1
 
+    method puedeIrA(pos) = self.estaDentroDelTablero(pos) and not obstaculos.estaBloqueada(pos)
+
     method moverA(nuevaPosicion) {
-        if (self.estaDentroDelTablero(nuevaPosicion) and not obstaculos.estaBloqueada(nuevaPosicion)) {
-            position = nuevaPosicion
-        }
+        [nuevaPosicion].filter({ pos => self.puedeIrA(pos) }).forEach({ pos => self.position(pos) })
+        juego.salidasEn(position).forEach({ salida => salida.usar() })
     }
 
     method arriba() {
