@@ -5,6 +5,7 @@ import pantallaDeInicio.*
 import escenarios.*
 import teclado.*
 import musica.*
+import billetera.*
 
 object juego {
     var escenarioActual = escenarioCasino
@@ -19,7 +20,9 @@ object juego {
 
         game.addVisual(fondo)
         game.addVisual(personaje)
-
+        game.addVisual(marcadorFondo)
+        game.addVisual(marcador)
+        
         teclado.moverPersonaje.mover()
 
         self.irA(escenarioCasino, game.at(7, 1))

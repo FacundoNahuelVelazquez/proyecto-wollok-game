@@ -6,6 +6,7 @@ import obstaculos.*
 
 
 
+
 program Casino {
 
     juego.iniciar()
