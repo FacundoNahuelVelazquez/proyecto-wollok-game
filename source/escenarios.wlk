@@ -1,6 +1,8 @@
 import wollok.game.*
 import obstaculos.*
 import juego.*
+import miniJefe.*
+
 
 object fondo {
     var property image = "casino\\casino-tablero.png"
@@ -17,6 +19,9 @@ object escenarioCasino {
         self.cargarParedes()
         self.cargarMesas()
         self.cargarMaquinitas()
+        if (!game.hasVisual(miniJefe)) {
+            game.addVisual(miniJefe)
+        }
     }
 
     method cargarParedes() {

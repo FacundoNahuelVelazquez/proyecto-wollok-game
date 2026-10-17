@@ -1,6 +1,9 @@
 import wollok.game.*
 
 object billetera {
+    // var saldo = self.saldoInicial()
+    // method saldoInicial() = 100
+    
     var saldo = 100
     const meta = 2000
 

@@ -6,6 +6,8 @@ import escenarios.*
 import teclado.*
 import musica.*
 import billetera.*
+import miniJefe.*
+
 
 object juego {
     var escenarioActual = escenarioCasino
@@ -31,12 +33,16 @@ object juego {
 
         keyboard.enter().onPressDo {
             game.removeVisual(casino)
+            game.addVisual(miniJefe)
         }
 
         game.start()
     }
 
     method irA(escenario, posicionInicial) {
+        if (game.hasVisual(miniJefe)) {
+        game.removeVisual(miniJefe)
+        }
         escenarioActual = escenario
         escenario.cargar()
         personaje.position(posicionInicial)
