@@ -3,6 +3,7 @@ import personaje.*
 import pantallaDeInicio.*
 import juego.*
 import obstaculos.*
+import miniJefe.*
 
 
 
