@@ -11,7 +11,7 @@ object fondo {
 }
 
 object escenarioCasino {
-    method salidas() = [salidaCasinoADados, encuentroMiniJefe]
+    method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados]
 
     method cargar() {
         fondo.image("casino\\casino-tablero.png")
@@ -46,17 +46,17 @@ object escenarioCasino {
 }
 
 
-object salidaCasinoADados {
+object salidaCasinoAVasos {
     const celdas = [game.at(15, 2)]
 
     method activaEn(pos) = celdas.contains(pos)
 
     method usar() {
-        juego.irA(escenarioDados, game.at(1, 5))
+        juego.irA(escenarioVasos, game.at(1, 5))
     }
 }
 
-object salidaDadosACasino {
+object salidaVasosACasino {
     const celdas = [game.at(0, 4), game.at(0, 5), game.at(0, 6)]
 
     method activaEn(pos) = celdas.contains(pos)
@@ -66,11 +66,11 @@ object salidaDadosACasino {
     }
 }
 
-object escenarioDados {
-    method salidas() = [salidaDadosACasino]
+object escenarioVasos {
+    method salidas() = [salidaVasosACasino]
 
     method cargar() {
-        fondo.image("casino\\escenario-dados.png")
+        fondo.image("casino\\escenario-vasos.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarEscenario()
@@ -91,7 +91,8 @@ object escenarioDados {
     }
 
     method cargarEscenario() {
-        obstaculos.bloquearZona(5, 11, 6, 9)      // escenario con la mesa de vasos y las banquetas del frente
+        obstaculos.bloquearZona(5, 10, 6, 9)      // escenario con la mesa de vasos y las banquetas del frente
+        obstaculos.bloquearZona(11, 11, 7, 9)     // borde derecho del escenario y banquetas de ese lado
         obstaculos.bloquearZona(4, 4, 8, 9)       // banquetas de la izquierda del escenario
     }
 
@@ -112,18 +113,93 @@ object escenarioDados {
 // la unica manera seria "derrotarlo", que seria esquivando todas sus cartas hasta que no tenga más, ahi terminaría este mini juego. 
 // en donde podemos salir con mas o menos plata que al inicio. 
 
+
 object escenarioPelea {
-    method salidas() = [] 
+    method salidas() = []
 
     method cargar() {
-        fondo.image("casino\\salon-casino-batalla.png") 
+        fondo.image("casino\\salon-casino-batalla.png")
         obstaculos.limpiar()
-        
-        miniJefe.position(game.at(6, 8)) 
-        
-        if (!game.hasVisual(miniJefe)) {
+        self.cargarParedes()
+        self.cargarMesas()
+        self.cargarPlantas()
+
+        miniJefe.position(game.at(6, 8))
+
+        if (not game.hasVisual(miniJefe)) {
             game.addVisual(miniJefe)
         }
+    }
+
+    method cargarParedes() {
+        obstaculos.bloquearZona(0, 15, 10, 11)    // pared de arriba y escenario del fondo
+        obstaculos.bloquearZona(0, 0, 0, 9)       // pared izquierda
+        obstaculos.bloquearZona(15, 15, 0, 9)     // pared derecha
+        obstaculos.bloquearZona(1, 6, 0, 1)       // pared de abajo, a la izquierda de la alfombra
+        obstaculos.bloquearZona(9, 14, 0, 1)      // pared de abajo, a la derecha de la alfombra
+    }
+
+    method cargarMesas() {
+        obstaculos.bloquearZona(1, 3, 7, 8)       // mesa de arriba, izquierda (con banquetas)
+        obstaculos.bloquearZona(12, 14, 7, 8)     // mesa de arriba, derecha (con banquetas)
+        obstaculos.bloquearZona(1, 4, 4, 5)       // ruleta de la izquierda
+        obstaculos.bloquearZona(2, 4, 3, 3)       // banquetas de la ruleta izquierda
+        obstaculos.bloquearZona(11, 14, 4, 5)     // ruleta de la derecha
+        obstaculos.bloquearZona(11, 13, 3, 3)     // banquetas de la ruleta derecha
+    }
+
+    method cargarPlantas() {
+        obstaculos.bloquearZona(4, 4, 9, 9)       // planta de arriba, izquierda
+        obstaculos.bloquearZona(11, 11, 9, 9)     // planta de arriba, derecha
+        obstaculos.bloquearZona(1, 1, 2, 2)       // planta de abajo, izquierda
+        obstaculos.bloquearZona(14, 14, 2, 2)     // planta de abajo, derecha
+    }
+}
+
+object escenarioDados {
+    method salidas() = [salidaDadosACasino]
+
+    method cargar() {
+        fondo.image("casino\\tablero-dados.png")
+        obstaculos.limpiar()
+        self.cargarParedes()
+        self.cargarMesa()
+        self.cargarPlantas()
+    }
+
+    method cargarParedes() {
+        obstaculos.bloquearZona(0, 15, 9, 11)     // pared de arriba con plantas y escenario
+        obstaculos.bloquearZona(0, 15, 0, 1)      // barandas y cordones de abajo
+    }
+
+    method cargarMesa() {
+        obstaculos.bloquearZona(5, 10, 4, 6)      // mesa de dados y banquetas
+    }
+
+    method cargarPlantas() {
+        obstaculos.bloquearZona(0, 0, 6, 7)       // plantas de la izquierda
+        obstaculos.bloquearZona(0, 1, 2, 2)       // plantas de abajo, izquierda
+        obstaculos.bloquearZona(14, 15, 2, 2)     // plantas de abajo, derecha
+    }
+}
+
+object salidaCasinoADados {
+    const celdas = [game.at(0, 2)]
+
+    method activaEn(pos) = celdas.contains(pos)
+
+    method usar() {
+        juego.irA(escenarioDados, game.at(14, 5))
+    }
+}
+
+object salidaDadosACasino {
+    const celdas = [game.at(15, 5), game.at(15, 6)]
+
+    method activaEn(pos) = celdas.contains(pos)
+
+    method usar() {
+        juego.irA(escenarioCasino, game.at(1, 2))
     }
 }
 
@@ -136,6 +212,6 @@ object encuentroMiniJefe {
     method activaEn(pos) = celdas.contains(pos)
 
     method usar() {
-        juego.irA(escenarioPelea, game.at(7, 1)) 
+        juego.irA(escenarioPelea, game.at(7, 1))
     }
 }
