@@ -11,7 +11,7 @@ object fondo {
 }
 
 object escenarioCasino {
-    method salidas() = [salidaCasinoADados]
+    method salidas() = [salidaCasinoADados, encuentroMiniJefe]
 
     method cargar() {
         fondo.image("casino\\casino-tablero.png")
@@ -105,5 +105,37 @@ object escenarioDados {
     method cargarBarra() {
         obstaculos.bloquearZona(11, 15, 0, 3)   // barra y estantes
         obstaculos.bloquearZona(10, 10, 1, 2)  // banquetas de la barra
+    }
+}
+
+// para los demás: la idea es que al momento de tocar ("interactuar") al crupier nos mande al otro tablero, de ese tablero no podemas salir. 
+// la unica manera seria "derrotarlo", que seria esquivando todas sus cartas hasta que no tenga más, ahi terminaría este mini juego. 
+// en donde podemos salir con mas o menos plata que al inicio. 
+
+object escenarioPelea {
+    method salidas() = [] 
+
+    method cargar() {
+        fondo.image("casino\\salon-casino-batalla.png") 
+        obstaculos.limpiar()
+        
+        miniJefe.position(game.at(6, 8)) 
+        
+        if (!game.hasVisual(miniJefe)) {
+            game.addVisual(miniJefe)
+        }
+    }
+}
+
+object encuentroMiniJefe {
+    const celdas = [
+        game.at(6, 7), game.at(7, 7), 
+        game.at(6, 8), game.at(7, 8)
+    ]
+
+    method activaEn(pos) = celdas.contains(pos)
+
+    method usar() {
+        juego.irA(escenarioPelea, game.at(7, 1)) 
     }
 }
