@@ -2,6 +2,8 @@ import wollok.game.*
 import obstaculos.*
 import juego.*
 import miniJefe.*
+import personaje.*
+
 
 
 object fondo {
@@ -129,6 +131,10 @@ object escenarioPelea {
         if (not game.hasVisual(miniJefe)) {
             game.addVisual(miniJefe)
         }
+
+        miniJefe.iniciarAtaque()
+
+        game.onCollideDo(personaje, {elemento => elemento.chocarConPersonaje()})
     }
 
     method cargarParedes() {

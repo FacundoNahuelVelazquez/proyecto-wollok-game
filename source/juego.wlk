@@ -54,6 +54,7 @@ object juego {
 
     method mostrarGameOver() {
         personaje.bloquear()
+        miniJefe.detenerAtaque()
         game.addVisual(pantallaGameOver)
     }
 
