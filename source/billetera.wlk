@@ -1,11 +1,10 @@
 import wollok.game.*
 
+
 object billetera {
-    // var saldo = self.saldoInicial()
-    // method saldoInicial() = 100
-    
-    var saldo = 100
+    const saldoInicial = 100
     const meta = 2000
+    var saldo = saldoInicial
 
     method saldo() = saldo
 
@@ -20,6 +19,12 @@ object billetera {
     method puedeApostar(monto) = saldo >= monto
 
     method alcanzoLaMeta() = saldo >= meta
+
+    method estaEnQuiebra() = saldo == 0
+
+    method reiniciar() {
+        saldo = saldoInicial
+    }
 }
 
 object marcadorFondo {

@@ -60,9 +60,17 @@ Juego 3: Sigue el vaso.
 
         Este juego consiste en tres vasos que inicialmente mostrarán cual de los 3 tienen la recompensa, luego intercambiarán de posición cierta cantidad de veces para finalmente tener que adivinar en cual está dicha recompensa.
 
-        Existirá solamente una recompensa que aplicará un x2.5 a la inversión por entrada al juego.
+        Antes de empezar, el jugador elige cuánto apostar: $50, $100 o $200 (no puede apostar más dinero del que tiene).
 
-        En caso de no acertar, se perderá todo el dinero invertido.
+        Existirá solamente una recompensa.
+
+        Si el jugador acierta, gana el monto que apostó y ese dinero se suma al que ya tenía.
+        Si no acierta, pierde el monto que apostó.
+
+        Ejemplos:
+        Apuesta $50  -> acierta: +$50  / falla: -$50
+        Apuesta $100 -> acierta: +$100 / falla: -$100
+        Apuesta $200 -> acierta: +$200 / falla: -$200
 
 
 ## Otros

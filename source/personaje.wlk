@@ -6,14 +6,23 @@ object personaje {
 
     var property position = game.origin()
     var imagenActual = "robert\\jugador-robert-sur-chiquito.png"
+    var puedeMoverse = true
 
     method image() = imagenActual
+
+    method bloquear() {
+        puedeMoverse = false
+    }
+
+    method liberar() {
+        puedeMoverse = true
+    }
 
     method estaDentroDelTablero(pos) =
         pos.x() >= 0 and pos.x() <= game.width() - 1 and
         pos.y() >= 0 and pos.y() <= game.height() - 1
 
-    method puedeIrA(pos) = self.estaDentroDelTablero(pos) and not obstaculos.estaBloqueada(pos)
+    method puedeIrA(pos) = puedeMoverse and self.estaDentroDelTablero(pos) and not obstaculos.estaBloqueada(pos)
 
     method moverA(nuevaPosicion) {
         [nuevaPosicion].filter({ pos => self.puedeIrA(pos) }).forEach({ pos => self.position(pos) })
@@ -39,4 +48,6 @@ object personaje {
         imagenActual = "robert\\jugador-robert-oeste-chiquito.png"
         self.moverA(position.left(1))
     }
+
+    method estaLibre() = puedeMoverse
 }

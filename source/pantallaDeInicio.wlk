@@ -14,3 +14,9 @@ object casino {
 
     method position() = game.origin()
 }
+
+object pantallaGameOver {
+    method image() = "casino\\game-over.png"
+
+    method position() = game.origin()
+}

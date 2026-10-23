@@ -48,5 +48,27 @@ object juego {
         personaje.position(posicionInicial)
     }
 
+    method verificarQuiebra() {
+    [billetera].filter({ b => b.estaEnQuiebra() }).forEach({ b => self.mostrarGameOver() })
+    }
+
+    method mostrarGameOver() {
+        personaje.bloquear()
+        game.addVisual(pantallaGameOver)
+    }
+
+    method reiniciar() {
+        [pantallaGameOver].filter({ p => game.hasVisual(p) }).forEach({ p => self.volverAEmpezar() })
+    }
+
+    method volverAEmpezar() {
+        game.removeVisual(pantallaGameOver)
+        billetera.reiniciar()
+        self.irA(escenarioCasino, game.at(7, 1))
+        personaje.liberar()
+    }
+
+    method estaEn(escenario) = escenarioActual == escenario
+
     method salidasEn(pos) = escenarioActual.salidas().filter({ salida => salida.activaEn(pos) })
 }
