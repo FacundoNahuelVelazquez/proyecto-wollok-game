@@ -65,6 +65,8 @@ object juego {
     method volverAEmpezar() {
         game.removeVisual(pantallaGameOver)
         billetera.reiniciar()
+        miniJefe.detenerAtaque()
+        miniJefe.position(game.at(6, 7))
         self.irA(escenarioCasino, game.at(7, 1))
         personaje.liberar()
     }
