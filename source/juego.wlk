@@ -7,6 +7,7 @@ import teclado.*
 import musica.*
 import billetera.*
 import miniJefe.*
+import lluviadecartas.*
 
 
 object juego {
@@ -55,7 +56,12 @@ object juego {
     method mostrarGameOver() {
         personaje.bloquear()
         miniJefe.detenerAtaque()
+        lluviaDeCartas.finalizar()
         game.addVisual(pantallaGameOver)
+    }
+
+    method detenerMiniJefe() {
+        miniJefe.detenerAtaque()
     }
 
     method reiniciar() {

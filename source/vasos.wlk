@@ -8,7 +8,7 @@ class Vaso {
     var property position
     var property tienePremio = false
 
-    method image() = "casino\\vaso.png"
+    method image() = "casino/vaso.png"
 
     method levantar() {
         position = position.up(1)
@@ -28,13 +28,13 @@ class Vaso {
 object panelVasos {
     method position() = game.at(3, 4)
 
-    method image() = "casino\\panel-vasos.png"
+    method image() = "casino/panel-vasos.png"
 }
 
 object premioVaso {
     var property position = game.at(4, 5)
 
-    method image() = "casino\\premio-vaso.png"
+    method image() = "casino/premio-vaso.png"
 }
 
 object mensajeVasos {
@@ -94,7 +94,7 @@ object juegoVasos {
         fase.numero(n)
     }
 
-    method estaCerca() = personaje.estaLibre() and juego.estaEn(escenarioVasos) and celdasMesa.contains(personaje.position())
+    method estaCerca() = personaje.estaLibre() && juego.estaEn(escenarioVasos) && celdasMesa.contains(personaje.position())
 
     method mostrarApuestas() {
         personaje.bloquear()
@@ -109,7 +109,7 @@ object juegoVasos {
         const monto = montos.get(n - 1)
         const alcanza = billetera.puedeApostar(monto)
         [monto].filter({ m => alcanza }).forEach({ m => self.empezar(m) })
-        [monto].filter({ m => not alcanza }).forEach({ m => mensajeVasos.text("No te alcanza el saldo para apostar $" + m) })
+        [monto].filter({ m => !alcanza }).forEach({ m => mensajeVasos.text("No te alcanza el saldo para apostar $" + m) })
     }
 
     method empezar(monto) {
@@ -168,7 +168,7 @@ object juegoVasos {
         game.addVisual(premioVaso)
         vasos.forEach({ v => v.levantar() })
         [elegido].filter({ v => v.tienePremio() }).forEach({ v => self.ganar() })
-        [elegido].filter({ v => not v.tienePremio() }).forEach({ v => self.perder() })
+        [elegido].filter({ v => !v.tienePremio() }).forEach({ v => self.perder() })
         game.schedule(2500, { self.cerrar() })
     }
 

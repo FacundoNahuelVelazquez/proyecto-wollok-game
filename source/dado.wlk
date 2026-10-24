@@ -48,7 +48,7 @@ object apuestaMenorOIgualA3 inherits Apuesta {
 object panelDado {
     method position() = game.at(3, 4)
 
-    method image() = "casino\\panel-vasos.png"
+    method image() = "casino/panel-vasos.png"
 }
 
 object dadoVisual {
@@ -56,7 +56,7 @@ object dadoVisual {
 
     method position() = game.at(7, 5)
 
-    method image() = "casino\\dado-" + valor + ".png"
+    method image() = "casino/dado-" + valor + ".png"
 }
 
 // renglón de arriba: títulos y resultados
@@ -136,7 +136,7 @@ object juegoDado {
         fase.numero(n)
     }
 
-    method estaCerca() = personaje.estaLibre() and juego.estaEn(escenarioDados) and celdasMesa.contains(personaje.position())
+    method estaCerca() = personaje.estaLibre() && juego.estaEn(escenarioDados) && celdasMesa.contains(personaje.position())
 
     method mostrarApuestas() {
         personaje.bloquear()
@@ -156,7 +156,7 @@ object juegoDado {
     method fijarMonto(monto) {
         const alcanza = billetera.puedeApostar(monto)
         [monto].filter({ m => alcanza }).forEach({ m => self.pedirTipo(m) })
-        [monto].filter({ m => not alcanza }).forEach({ m => mensajeDado.text("No te alcanza el saldo para apostar $" + m) })
+        [monto].filter({ m => !alcanza }).forEach({ m => mensajeDado.text("No te alcanza el saldo para apostar $" + m) })
     }
 
     method pedirTipo(monto) {
@@ -168,7 +168,7 @@ object juegoDado {
 
     method elegirTipo(n) {
         [n].filter({ k => k == 1 }).forEach({ k => self.pedirNumero() })
-        [n].filter({ k => k > 1 and k <= 5 }).forEach({ k => self.tirar(tiposFijos.get(k - 2)) })
+        [n].filter({ k => k > 1 && k <= 5 }).forEach({ k => self.tirar(tiposFijos.get(k - 2)) })
     }
 
     method pedirNumero() {
@@ -194,7 +194,7 @@ object juegoDado {
     method mostrarResultado(resultado) {
         dadoVisual.valor(resultado)
         [resultado].filter({ r => apuesta.gana(r) }).forEach({ r => self.ganar(r) })
-        [resultado].filter({ r => not apuesta.gana(r) }).forEach({ r => self.perder(r) })
+        [resultado].filter({ r => !apuesta.gana(r) }).forEach({ r => self.perder(r) })
         game.schedule(2500, { self.cerrar() })
     }
 

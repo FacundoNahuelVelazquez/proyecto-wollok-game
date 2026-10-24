@@ -3,11 +3,12 @@ import obstaculos.*
 import juego.*
 import miniJefe.*
 import personaje.*
+import lluviadecartas.*
 
 
 
 object fondo {
-    var property image = "casino\\casino-tablero.png"
+    var property image = "casino/casino-tablero.png"
 
     method position() = game.origin()
 }
@@ -16,7 +17,7 @@ object escenarioCasino {
     method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados]
 
     method cargar() {
-        fondo.image("casino\\casino-tablero.png")
+        fondo.image("casino/casino-tablero.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarMesas()
@@ -72,7 +73,7 @@ object escenarioVasos {
     method salidas() = [salidaVasosACasino]
 
     method cargar() {
-        fondo.image("casino\\escenario-vasos.png")
+        fondo.image("casino/escenario-vasos.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarEscenario()
@@ -120,7 +121,7 @@ object escenarioPelea {
     method salidas() = []
 
     method cargar() {
-        fondo.image("casino\\salon-casino-batalla.png")
+        fondo.image("casino/salon-casino-batalla.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarMesas()
@@ -128,11 +129,12 @@ object escenarioPelea {
 
         miniJefe.position(game.at(6, 8))
 
-        if (not game.hasVisual(miniJefe)) {
+        if (!game.hasVisual(miniJefe)) {
             game.addVisual(miniJefe)
         }
 
         miniJefe.iniciarAtaque()
+        lluviaDeCartas.iniciar()
 
         game.onCollideDo(personaje, {elemento => elemento.chocarConPersonaje()})
     }
@@ -166,7 +168,7 @@ object escenarioDados {
     method salidas() = [salidaDadosACasino]
 
     method cargar() {
-        fondo.image("casino\\tablero-dados.png")
+        fondo.image("casino/tablero-dados.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarMesa()
