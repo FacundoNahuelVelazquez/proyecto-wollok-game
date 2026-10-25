@@ -7,6 +7,8 @@ object billetera {
     const recompensaMoneda = 20
     var saldo = saldoInicial
 
+    method tieneAlMenos(monto) = saldo >= monto
+
     method saldo() = saldo
 
     method sumar(monto) {

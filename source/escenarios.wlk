@@ -4,6 +4,7 @@ import juego.*
 import miniJefe.*
 import personaje.*
 import lluviadecartas.*
+import billetera.*
 
 
 
@@ -19,6 +20,7 @@ object escenarioCasino {
     method cargar() {
         fondo.image("casino\\casino-tablero.png")
         obstaculos.limpiar()
+        self.cargarCrupier()
         self.cargarParedes()
         self.cargarMesas()
         self.cargarMaquinitas()
@@ -45,6 +47,11 @@ object escenarioCasino {
     method cargarMaquinitas() {
         obstaculos.bloquearZona(0, 4, 3, 4)       // maquinitas de arriba, izquierda
         obstaculos.bloquearZona(11, 15, 3, 4)     // maquinitas de arriba, derecha
+    }
+
+    method cargarCrupier() {
+        const base = miniJefe.position()
+        obstaculos.bloquearZona(base.x(), base.x() + 1, base.y(), base.y() + 2)    // ocupa 2 casillas de ancho y 3 de alto, como su sprite
     }
 }
 
@@ -124,6 +131,7 @@ object escenarioPelea {
         if (not lluviaDeCartas.estaJugando()) {
             fondo.image("casino\\salon-casino-batalla.png")
             obstaculos.limpiar()
+            obstaculos.bloquearZona(4, 11, 8, 11)
             self.cargarParedes()
             self.cargarMesas()
             self.cargarPlantas()
@@ -213,14 +221,19 @@ object salidaDadosACasino {
 }
 
 object encuentroMiniJefe {
-    const celdas = [
-        game.at(6, 7), game.at(7, 7), 
-        game.at(6, 8), game.at(7, 8)
-    ]
+    const fichasNecesarias = 500
 
-    method activaEn(pos) = celdas.contains(pos)
+    method activaEn(pos) =
+        (pos.x() - miniJefe.position().x()).between(-1, 2) and
+        (pos.y() - miniJefe.position().y()).between(-1, 3)
 
     method usar() {
-        juego.irA(escenarioPelea, game.at(7, 1))
+        const puedePasar = billetera.tieneAlMenos(fichasNecesarias)
+        [self].filter({ e => puedePasar }).forEach({ e => juego.irA(escenarioPelea, game.at(7, 1)) })
+        [self].filter({ e => not puedePasar }).forEach({ e => e.advertir() })
+    }
+
+    method advertir() {
+        game.say(miniJefe, "cuchame una cosa robert, necesitas de minimo 500 fichas para pelear conmigo")
     }
 }
