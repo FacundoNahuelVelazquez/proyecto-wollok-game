@@ -108,6 +108,9 @@ class Carta inherits ObjetoLluvia {
     override method interactuar() {
         if (activo) {
             billetera.cobrarDanioCarta(self.danio())
+            
+            personaje.recibirDanio() 
+            
             juego.verificarQuiebra()
             self.retirar()
         }

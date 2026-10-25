@@ -1,13 +1,5 @@
 import wollok.game.*
 
-// object casino {
-//     method cargar() {
-//         game.boardGround("casino\\casino-poster-game.png")
-//         obstaculos.limpiar()
-//     }
-// }
-
-
 object casino {
 
     method image() = "casino\\casino-poster-inicio.png"
