@@ -4,7 +4,7 @@ import wollok.game.*
 object billetera {
     const saldoInicial = 100
     const meta = 2000
-    const recompensaMoneda = 20
+    const recompensaMoneda = 50
     var saldo = saldoInicial
 
     method tieneAlMenos(monto) = saldo >= monto

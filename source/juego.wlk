@@ -66,7 +66,7 @@ object juego {
         
         miniJefe.position(game.at(6, 7))
         
-        billetera.sumar(300) 
+        billetera.sumar(200) 
         
         self.irA(escenarioCasino, game.at(7, 1))
         
