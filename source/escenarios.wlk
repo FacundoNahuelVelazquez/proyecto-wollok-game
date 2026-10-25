@@ -17,7 +17,7 @@ object escenarioCasino {
     method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados]
 
     method cargar() {
-        fondo.image("casino/casino-tablero.png")
+        fondo.image("casino\\casino-tablero.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarMesas()
@@ -73,7 +73,7 @@ object escenarioVasos {
     method salidas() = [salidaVasosACasino]
 
     method cargar() {
-        fondo.image("casino/escenario-vasos.png")
+        fondo.image("casino\\escenario-vasos.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarEscenario()
@@ -121,22 +121,23 @@ object escenarioPelea {
     method salidas() = []
 
     method cargar() {
-        fondo.image("casino/salon-casino-batalla.png")
-        obstaculos.limpiar()
-        self.cargarParedes()
-        self.cargarMesas()
-        self.cargarPlantas()
+        if (not lluviaDeCartas.estaJugando()) {
+            fondo.image("casino\\salon-casino-batalla.png")
+            obstaculos.limpiar()
+            self.cargarParedes()
+            self.cargarMesas()
+            self.cargarPlantas()
 
-        miniJefe.position(game.at(6, 8))
+            miniJefe.position(game.at(6, 8))
 
-        if (!game.hasVisual(miniJefe)) {
-            game.addVisual(miniJefe)
+            if (not game.hasVisual(miniJefe)) {
+                game.addVisual(miniJefe)
+            }
+
+            lluviaDeCartas.iniciar()
         }
 
-        miniJefe.iniciarAtaque()
-        lluviaDeCartas.iniciar()
-
-        game.onCollideDo(personaje, {elemento => elemento.chocarConPersonaje()})
+        //game.onCollideDo(personaje, {elemento => elemento.chocarConPersonaje()})
     }
 
     method cargarParedes() {
@@ -168,7 +169,7 @@ object escenarioDados {
     method salidas() = [salidaDadosACasino]
 
     method cargar() {
-        fondo.image("casino/tablero-dados.png")
+        fondo.image("casino\\tablero-dados.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarMesa()

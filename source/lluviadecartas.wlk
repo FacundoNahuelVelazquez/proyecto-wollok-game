@@ -1,3 +1,4 @@
+import source.billetera.*
 import wollok.game.*
 import cartas.*
 import juego.*
@@ -18,7 +19,7 @@ class PatronColumnasImpares inherits PatronDeLluvia {
 }
 
 object lluviaDeCartas {
-    const duracion = 100
+    const duracion = 60
     const primeraColumna = 2
     const cantidadColumnas = 12
     const filaDeCaida = 9
@@ -34,7 +35,9 @@ object lluviaDeCartas {
     method estaJugando() = jugando
 
     method iniciar() {
-        self.finalizar()
+        if (jugando) {             
+            self.finalizar()
+        }
         objetos = []
         self.reponerColumnas()
         jugando = true
@@ -43,7 +46,10 @@ object lluviaDeCartas {
         actualizacionesDePatron = 0
         movimientosObservados = personaje.cantidadMovimientos()
         segundosQuieto = 0
-        game.addVisual(contadorRonda)
+        if (not game.hasVisual(contadorRonda)) { 
+            game.addVisual(contadorRonda)
+        }
+        miniJefe.iniciarMovimiento()
         contadorRonda.iniciar(duracion)
         game.onTick(1000, "relojLluvia", { self.actualizarRonda() })
         game.onTick(500, "lanzamientoCartas", { self.lanzarCartas() })
@@ -56,9 +62,12 @@ object lluviaDeCartas {
     method actualizarRonda() {
         if (jugando) {
             contadorRonda.pasarSegundo()
+            billetera.sumar(10)
             if (contadorRonda.seAcabo()) {
-                self.finalizar()
-                juego.detenerMiniJefe()
+                game.schedule(50, {
+                    self.finalizar()
+                    juego.detenerMiniJefe()
+                })
             }
         }
     }
@@ -142,20 +151,12 @@ object lluviaDeCartas {
 
     method lanzarMoneda() {
         if (jugando) {
-            const posicionesDisponibles = []
-            (1..14).forEach({ columna =>
-                (1..9).forEach({ fila =>
-                    const posicion = game.at(columna, fila)
-                    if (self.posicionValidaParaMoneda(posicion)) {
-                        posicionesDisponibles.add(posicion)
-                    }
-                })
-            })
-            if (!posicionesDisponibles.isEmpty()) {
-                const posicion = posicionesDisponibles.anyOne()
-                if (self.posicionValidaParaMoneda(posicion)) {
-                    self.agregarObjeto(new Moneda(), posicion.x(), posicion.y())
-                }
+            const col = (1..14).anyOne()
+            const fil = (1..8).anyOne() 
+            const posicion = game.at(col, fil)
+            
+            if (self.posicionValidaParaMoneda(posicion)) {
+                self.agregarObjeto(new Moneda(), col, fil)
             }
         }
     }
@@ -197,12 +198,15 @@ object lluviaDeCartas {
     }
 
     method finalizar() {
-        jugando = false
-        self.detenerTicks()
-        objetos.forEach({ objeto => objeto.retirar() })
-        objetos = []
-        if (game.hasVisual(contadorRonda)) {
-            game.removeVisual(contadorRonda)
+        if (jugando) {            
+            jugando = false
+            self.detenerTicks()
+            miniJefe.detenerMovimiento()
+            objetos.forEach({ objeto => objeto.retirar() })
+            objetos = []
+            if (game.hasVisual(contadorRonda)) {
+                game.removeVisual(contadorRonda)
+            }
         }
     }
 

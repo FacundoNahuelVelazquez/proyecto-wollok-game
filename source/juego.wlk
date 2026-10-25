@@ -55,13 +55,22 @@ object juego {
 
     method mostrarGameOver() {
         personaje.bloquear()
-        miniJefe.detenerAtaque()
-        lluviaDeCartas.finalizar()
-        game.addVisual(pantallaGameOver)
+        if (not game.hasVisual(pantallaGameOver)) {
+            game.addVisual(pantallaGameOver)
+            game.schedule(50, { lluviaDeCartas.finalizar() }) 
+        }
     }
 
     method detenerMiniJefe() {
-        miniJefe.detenerAtaque()
+        miniJefe.detenerMovimiento() 
+        
+        miniJefe.position(game.at(6, 7))
+        
+        billetera.sumar(300) 
+        
+        self.irA(escenarioCasino, game.at(7, 1))
+        
+        //console.println("¡Sobreviviste a la lluvia de cartas!")
     }
 
     method reiniciar() {
@@ -69,10 +78,16 @@ object juego {
     }
 
     method volverAEmpezar() {
-        game.removeVisual(pantallaGameOver)
+        if (game.hasVisual(pantallaGameOver)) {
+            game.removeVisual(pantallaGameOver)
+        }
+        
         billetera.reiniciar()
-        miniJefe.detenerAtaque()
-        miniJefe.position(game.at(6, 7))
+        lluviaDeCartas.finalizar() 
+        
+        miniJefe.detenerMovimiento()
+        miniJefe.position(game.at(6, 7)) 
+        
         self.irA(escenarioCasino, game.at(7, 1))
         personaje.liberar()
     }

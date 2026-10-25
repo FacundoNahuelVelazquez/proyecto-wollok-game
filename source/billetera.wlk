@@ -4,7 +4,6 @@ import wollok.game.*
 object billetera {
     const saldoInicial = 100
     const meta = 2000
-    const recompensaEsquivaCarta = 5
     const recompensaMoneda = 20
     var saldo = saldoInicial
 
@@ -27,13 +26,8 @@ object billetera {
     }
 
     method premiarEsquivaCarta(columnaCarta, columnaJugadorAlAparecer, movimientosAlAparecer, columnaJugadorActual, movimientosActuales) {
-        if (
-            columnaCarta == columnaJugadorAlAparecer &&
-            columnaJugadorActual != columnaCarta &&
-            movimientosActuales > movimientosAlAparecer
-        ) {
-            self.sumar(recompensaEsquivaCarta)
-        }
+        // Te da la plata siempre que una carta llegue sana y salva al fondo
+        //self.sumar(20) 
     }
 
     method puedeApostar(monto) = saldo >= monto
@@ -50,7 +44,7 @@ object billetera {
 object marcadorFondo {
     method position() = game.at(0, 11)
 
-    method image() = "casino/marcador-fondo.png"
+    method image() = "casino\\marcador-fondo.png"
 }
 
 object marcador {

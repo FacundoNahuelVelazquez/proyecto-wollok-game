@@ -1,25 +1,40 @@
 import wollok.game.*
-import juego.*       // <-- IMPORTANTE PARA SABER DÓNDE ESTAMOS
-import escenarios.*  // <-- IMPORTANTE PARA SABER CUÁL ES EL TABLERO DE PELEA
+import juego.*       
+import escenarios.* 
 
 object miniJefe {
     var property position = game.at(6, 7)
     var direccion = 1
-    var estaAtacando = false
+    var seEstaMoviendo = false
+//    var estaAtacando = false
 
-    method image() = "mini-jefe-crupier/crupier-mini-jefe-chiquito.png"
+    method image() = "mini-jefe-crupier\\crupier-mini-jefe-chiquito.png"
 
-    method iniciarAtaque() {
-        if (!estaAtacando) {
-            estaAtacando = true
-            game.onTick(300, "movimiento_jefe", { self.mover() })
+    // method iniciarAtaque() {
+    //     if (!estaAtacando) {
+    //         estaAtacando = true
+    //         game.onTick(300, "movimiento_jefe", { self.mover() })
+    //     }
+    // }
+
+    // method detenerAtaque() {
+    //     if (estaAtacando) {
+    //         game.removeTickEvent("movimiento_jefe")
+    //         estaAtacando = false
+    //     }
+    // }
+
+    method iniciarMovimiento() {
+        if (not seEstaMoviendo) {
+            seEstaMoviendo = true
+            game.onTick(300, "caminar_jefe", { self.mover() })
         }
     }
 
-    method detenerAtaque() {
-        if (estaAtacando) {
-            game.removeTickEvent("movimiento_jefe")
-            estaAtacando = false
+    method detenerMovimiento() {
+        if (seEstaMoviendo) {
+            seEstaMoviendo = false
+            game.removeTickEvent("caminar_jefe")
         }
     }
 

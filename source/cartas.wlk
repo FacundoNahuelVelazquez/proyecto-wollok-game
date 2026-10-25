@@ -44,7 +44,9 @@ class ObjetoLluvia {
     method retirar() {
         if (activo) {
             activo = false
-            game.removeVisual(self)
+            if (game.hasVisual(self)) { 
+                game.removeVisual(self)
+            }
         }
     }
 }
@@ -113,24 +115,24 @@ class Carta inherits ObjetoLluvia {
 }
 
 class CartaNormal inherits Carta {
-    override method image() = "mini-jefe-crupier/carta-crupier-mini.png"
+    override method image() = "mini-jefe-crupier\\carta-crupier-mini.png"
     override method danio() = 25
 }
 
 class CartaEspecial inherits Carta {
-    override method image() = "mini-jefe-crupier/carta-super-crupier-mini.png"
+    override method image() = "mini-jefe-crupier\\carta-super-crupier-mini.png"
     override method danio() = 50
     override method movimientosPorCasilla() = 1
 }
 
 class CartaRapida inherits CartaNormal {
-    override method image() = "mini-jefe-crupier/carta-super-crupier-mini.png"
+    override method image() = "mini-jefe-crupier\\carta-crupier-rapida.png"
     override method danio() = 50
     override method movimientosPorCasilla() = 1
 }
 
 class Moneda inherits ObjetoLluvia {
-    override method image() = "casino/premio-vaso.png"
+    override method image() = "casino\\premio-vaso.png"
 
     override method iniciar() {
         game.schedule(8000, { self.retirar() })
