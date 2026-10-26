@@ -63,11 +63,3 @@ object modoDificil {
     method ticsPatronInicial() = 14
     method ticsPatronMinimo() = 6
 }
-
-object textoDificultad {
-    method position() = game.at(8, 0)
-
-    method text() = "Dificultad: " + dificultad.actual().nombre() + "   (H para cambiar)"
-
-    method textColor() = "FFFFFF"
-}

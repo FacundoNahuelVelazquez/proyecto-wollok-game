@@ -30,8 +30,8 @@ object juego {
 
         self.irA(escenarioCasino, game.at(7, 1))
 
-        game.addVisual(casino)
-        game.addVisual(textoDificultad)
+        //game.addVisual(casino)
+        menuInicio.configurar()
         personaje.bloquear()
 
         keyboard.enter().onPressDo { self.empezarPartida() }
@@ -46,7 +46,6 @@ object juego {
 
     method comenzar() {
         game.removeVisual(casino)
-        game.removeVisual(textoDificultad)
         billetera.reiniciar()
         personaje.liberar()
     }
