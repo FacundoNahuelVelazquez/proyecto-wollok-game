@@ -5,6 +5,7 @@ import miniJefe.*
 import personaje.*
 import lluviadecartas.*
 import billetera.*
+import musica.*
 
 
 
@@ -18,6 +19,7 @@ object escenarioCasino {
     method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados]
 
     method cargar() {
+        musica.cambiarA("sonidos\\Casino-game-ambiente1.mp3")
         fondo.image("casino\\casino-tablero.png")
         obstaculos.limpiar()
         self.cargarCrupier()
@@ -80,6 +82,7 @@ object escenarioVasos {
     method salidas() = [salidaVasosACasino]
 
     method cargar() {
+        musica.cambiarA("sonidos\\vasos.mp3")  // falta agregar una cancion
         fondo.image("casino\\escenario-vasos.png")
         obstaculos.limpiar()
         self.cargarParedes()
@@ -129,6 +132,7 @@ object escenarioPelea {
 
     method cargar() {
         if (not lluviaDeCartas.estaJugando()) {
+            musica.cambiarA("sonidos\\jefe-final.mp3") // estuve probando con un tema que tenia en mi compu XD, esta sujeto a cambios, es solo una prueba
             fondo.image("casino\\salon-casino-batalla.png")
             obstaculos.limpiar()
             obstaculos.bloquearZona(4, 11, 8, 11)
@@ -177,6 +181,7 @@ object escenarioDados {
     method salidas() = [salidaDadosACasino]
 
     method cargar() {
+        musica.cambiarA("sonidos\\dados.mp3")  // falta agregar algun tema aca tambien :3
         fondo.image("casino\\tablero-dados.png")
         obstaculos.limpiar()
         self.cargarParedes()
