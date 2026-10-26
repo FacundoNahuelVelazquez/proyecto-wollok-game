@@ -1,11 +1,9 @@
 import wollok.game.*
-
+import dificultad.*
 
 object billetera {
-    const saldoInicial = 100
-    const meta = 2000
     const recompensaMoneda = 50
-    var saldo = saldoInicial
+    var saldo = 100
 
     method tieneAlMenos(monto) = saldo >= monto
 
@@ -34,12 +32,14 @@ object billetera {
 
     method puedeApostar(monto) = saldo >= monto
 
-    method alcanzoLaMeta() = saldo >= meta
+    method meta() = dificultad.actual().meta()
+
+    method alcanzoLaMeta() = saldo >= self.meta()
 
     method estaEnQuiebra() = saldo == 0
 
     method reiniciar() {
-        saldo = saldoInicial
+        saldo = dificultad.actual().saldoInicial()
     }
 }
 

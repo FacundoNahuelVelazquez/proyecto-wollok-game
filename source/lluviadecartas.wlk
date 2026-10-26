@@ -1,10 +1,11 @@
-import source.billetera.*
+import billetera.*
 import wollok.game.*
 import cartas.*
 import juego.*
 import personaje.*
 import obstaculos.*
 import miniJefe.*
+import dificultad.*
 
 class PatronDeLluvia {
     method columnas() = []
@@ -51,18 +52,19 @@ object lluviaDeCartas {
         }
         miniJefe.iniciarMovimiento()
         contadorRonda.iniciar(duracion)
+        const modo = dificultad.actual()
         game.onTick(1000, "relojLluvia", { self.actualizarRonda() })
-        game.onTick(500, "lanzamientoCartas", { self.lanzarCartas() })
+        game.onTick(modo.intervaloLanzamiento(), "lanzamientoCartas", { self.lanzarCartas() })
         game.onTick(500, "patronesLluvia", { self.actualizarPatrones() })
         game.onTick(1000, "quietudLluvia", { self.controlarQuietud() })
-        game.onTick(3000, "aparicionMonedas", { self.lanzarMoneda() })
-        game.onTick(200, "movimientoLluvia", { self.actualizarObjetos() })
+        game.onTick(modo.intervaloMonedas(), "aparicionMonedas", { self.lanzarMoneda() })
+        game.onTick(modo.intervaloMovimiento(), "movimientoLluvia", { self.actualizarObjetos() })
     }
 
     method actualizarRonda() {
         if (jugando) {
             contadorRonda.pasarSegundo()
-            billetera.sumar(10)
+            billetera.sumar(dificultad.actual().gananciaPorSegundo())
             if (contadorRonda.seAcabo()) {
                 game.schedule(50, {
                     self.finalizar()
@@ -79,7 +81,7 @@ object lluviaDeCartas {
         if (jugando) {
             if (movimientosObservados == personaje.cantidadMovimientos()) {
                 segundosQuieto += 1
-                if (segundosQuieto >= 4) {
+                if (segundosQuieto >= dificultad.actual().segundosQuietoMaximo()) {
                     self.lanzarCartaEn(
                         new CartaRapida(),
                         personaje.position().x(),
@@ -102,7 +104,7 @@ object lluviaDeCartas {
                 self.lanzarCartaAleatoria(new CartaEspecial())
             }
             if (
-                contadorRonda.segundosRestantes() <= 30 &&
+                contadorRonda.segundosRestantes() <= 30 and
                 cantidadLanzamientos % 4 == 0
             ) {
                 self.lanzarCartaAleatoria(new CartaEspecial())
@@ -120,7 +122,8 @@ object lluviaDeCartas {
         }
     }
 
-    method ticsEntrePatrones() = (20 - self.etapaDificultad() * 3).max(10)
+    method ticsEntrePatrones() =
+        (dificultad.actual().ticsPatronInicial() - self.etapaDificultad() * 3).max(dificultad.actual().ticsPatronMinimo())
 
     method lanzarPatron() {
         if (jugando) {
@@ -162,11 +165,11 @@ object lluviaDeCartas {
     }
 
     method posicionValidaParaMoneda(posicion) =
-        posicion.y() < miniJefe.position().y() &&
-        !obstaculos.estaBloqueada(posicion) &&
-        posicion != personaje.position() &&
+        posicion.y() < miniJefe.position().y() and
+        not obstaculos.estaBloqueada(posicion) and
+        not (posicion == personaje.position()) and
         objetos.filter({ elemento =>
-            elemento.estaActivo() && elemento.position() == posicion
+            elemento.estaActivo() and elemento.position() == posicion
         }).isEmpty()
 
     method agregarObjeto(objeto, columna, fila) {

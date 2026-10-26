@@ -4,6 +4,7 @@ import personaje.*
 import juego.*
 import escenarios.*
 import vasos.*
+import dificultad.*
 
 // tipos de apuestas
 class Apuesta {
@@ -16,31 +17,31 @@ class ApuestaNumero inherits Apuesta {
     const numero
 
     override method gana(resultado) = resultado == numero
-    override method multiplicador() = 5
+    override method multiplicador() = dificultad.actual().multiplicadorNumero()
     override method nombre() = "al número " + numero
 }
 
 object apuestaPar inherits Apuesta {
     override method gana(resultado) = resultado % 2 == 0
-    override method multiplicador() = 1.8
+    override method multiplicador() = dificultad.actual().multiplicadorRango()
     override method nombre() = "a que salga par"
 }
 
 object apuestaImpar inherits Apuesta {
     override method gana(resultado) = resultado % 2 == 1
-    override method multiplicador() = 1.8
+    override method multiplicador() = dificultad.actual().multiplicadorRango()
     override method nombre() = "a que salga impar"
 }
 
 object apuestaMayorA3 inherits Apuesta {
     override method gana(resultado) = resultado > 3
-    override method multiplicador() = 1.8
+    override method multiplicador() = dificultad.actual().multiplicadorRango()
     override method nombre() = "a mayor que 3"
 }
 
 object apuestaMenorOIgualA3 inherits Apuesta {
     override method gana(resultado) = resultado <= 3
-    override method multiplicador() = 1.8
+    override method multiplicador() = dificultad.actual().multiplicadorRango()
     override method nombre() = "a menor o igual a 3"
 }
 
@@ -136,7 +137,7 @@ object juegoDado {
         fase.numero(n)
     }
 
-    method estaCerca() = personaje.estaLibre() && juego.estaEn(escenarioDados) && celdasMesa.contains(personaje.position())
+    method estaCerca() = personaje.estaLibre() and juego.estaEn(escenarioDados) and celdasMesa.contains(personaje.position())
 
     method mostrarApuestas() {
         personaje.bloquear()
@@ -156,7 +157,7 @@ object juegoDado {
     method fijarMonto(monto) {
         const alcanza = billetera.puedeApostar(monto)
         [monto].filter({ m => alcanza }).forEach({ m => self.pedirTipo(m) })
-        [monto].filter({ m => !alcanza }).forEach({ m => mensajeDado.text("No te alcanza el saldo para apostar $" + m) })
+        [monto].filter({ m => not alcanza }).forEach({ m => mensajeDado.text("No te alcanza el saldo para apostar $" + m) })
     }
 
     method pedirTipo(monto) {
@@ -168,7 +169,7 @@ object juegoDado {
 
     method elegirTipo(n) {
         [n].filter({ k => k == 1 }).forEach({ k => self.pedirNumero() })
-        [n].filter({ k => k > 1 && k <= 5 }).forEach({ k => self.tirar(tiposFijos.get(k - 2)) })
+        [n].filter({ k => k > 1 and k <= 5 }).forEach({ k => self.tirar(tiposFijos.get(k - 2)) })
     }
 
     method pedirNumero() {
@@ -194,7 +195,7 @@ object juegoDado {
     method mostrarResultado(resultado) {
         dadoVisual.valor(resultado)
         [resultado].filter({ r => apuesta.gana(r) }).forEach({ r => self.ganar(r) })
-        [resultado].filter({ r => !apuesta.gana(r) }).forEach({ r => self.perder(r) })
+        [resultado].filter({ r => not apuesta.gana(r) }).forEach({ r => self.perder(r) })
         game.schedule(2500, { self.cerrar() })
     }
 

@@ -3,6 +3,7 @@ import billetera.*
 import personaje.*
 import juego.*
 import escenarios.*
+import dificultad.*
 
 class Vaso {
     var property position
@@ -21,7 +22,8 @@ class Vaso {
     method moverHacia(destino) {
         const distancia = destino.x() - position.x()
         const direccion = distancia / distancia.abs()
-        (1..distancia.abs()).forEach({ paso => game.schedule(paso * 200, { position = position.right(direccion) }) })
+        const ms = dificultad.actual().msPorCeldaVaso()
+        (1..distancia.abs()).forEach({ paso => game.schedule(paso * ms, { position = position.right(direccion) }) })
     }
 }
 
@@ -81,8 +83,6 @@ object juegoVasos {
     const vasos = [new Vaso(position = game.at(4, 5)), new Vaso(position = game.at(7, 5)), new Vaso(position = game.at(10, 5))]
     const montos = [50, 100, 200]
     const celdasMesa = [game.at(6, 5), game.at(7, 5), game.at(8, 5), game.at(9, 5)]
-    const cantidadIntercambios = 6
-    const tiempoPaso = 1100
     var fase = faseLibre
     var inversion = 0
 
@@ -94,7 +94,7 @@ object juegoVasos {
         fase.numero(n)
     }
 
-    method estaCerca() = personaje.estaLibre() && juego.estaEn(escenarioVasos) && celdasMesa.contains(personaje.position())
+    method estaCerca() = personaje.estaLibre() and juego.estaEn(escenarioVasos) and celdasMesa.contains(personaje.position())
 
     method mostrarApuestas() {
         personaje.bloquear()
@@ -109,7 +109,7 @@ object juegoVasos {
         const monto = montos.get(n - 1)
         const alcanza = billetera.puedeApostar(monto)
         [monto].filter({ m => alcanza }).forEach({ m => self.empezar(m) })
-        [monto].filter({ m => !alcanza }).forEach({ m => mensajeVasos.text("No te alcanza el saldo para apostar $" + m) })
+        [monto].filter({ m => not alcanza }).forEach({ m => mensajeVasos.text("No te alcanza el saldo para apostar $" + m) })
     }
 
     method empezar(monto) {
@@ -119,7 +119,7 @@ object juegoVasos {
         fase = faseMezclando
         mensajeVasos.text("Mirá bien dónde está el premio...")
         self.mostrarPremio()
-        game.schedule(2000, { self.terminarMuestra() })
+        game.schedule(dificultad.actual().tiempoMuestraPremio(), { self.terminarMuestra() })
     }
 
     method vasoConPremio() = vasos.find({ v => v.tienePremio() })
@@ -137,9 +137,10 @@ object juegoVasos {
     }
 
     method mezclar() {
+        const modo = dificultad.actual()
         mensajeVasos.text("Mezclando...")
-        (1..cantidadIntercambios).forEach({ i => game.schedule(i * tiempoPaso, { self.intercambiarAlAzar() }) })
-        game.schedule((cantidadIntercambios + 1) * tiempoPaso, { self.pedirEleccion() })
+        (1..modo.intercambiosVasos()).forEach({ i => game.schedule(i * modo.tiempoPasoVasos(), { self.intercambiarAlAzar() }) })
+        game.schedule((modo.intercambiosVasos() + 1) * modo.tiempoPasoVasos(), { self.pedirEleccion() })
     }
 
     method vasoEn(posicion) = vasos.find({ v => v.position() == posicion })
@@ -153,7 +154,7 @@ object juegoVasos {
         vasoA.levantar()
         vasoA.moverHacia(destinoA)
         vasoB.moverHacia(destinoB)
-        game.schedule(700, { vasoA.bajar() })
+        game.schedule(dificultad.actual().tiempoBajarVaso(), { vasoA.bajar() })
     }
 
     method pedirEleccion() {
@@ -168,7 +169,7 @@ object juegoVasos {
         game.addVisual(premioVaso)
         vasos.forEach({ v => v.levantar() })
         [elegido].filter({ v => v.tienePremio() }).forEach({ v => self.ganar() })
-        [elegido].filter({ v => !v.tienePremio() }).forEach({ v => self.perder() })
+        [elegido].filter({ v => not v.tienePremio() }).forEach({ v => self.perder() })
         game.schedule(2500, { self.cerrar() })
     }
 

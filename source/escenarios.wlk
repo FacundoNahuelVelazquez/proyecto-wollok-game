@@ -6,6 +6,7 @@ import personaje.*
 import lluviadecartas.*
 import billetera.*
 import musica.*
+import dificultad.*
 
 
 
@@ -26,9 +27,7 @@ object escenarioCasino {
         self.cargarParedes()
         self.cargarMesas()
         self.cargarMaquinitas()
-        if (!game.hasVisual(miniJefe)) {
-            game.addVisual(miniJefe)
-        }
+        [miniJefe].filter({ m => not game.hasVisual(m) }).forEach({ m => game.addVisual(m) })
     }
 
     method cargarParedes() {
@@ -131,25 +130,23 @@ object escenarioPelea {
     method salidas() = []
 
     method cargar() {
-        if (not lluviaDeCartas.estaJugando()) {
-            musica.cambiarA("sonidos\\jefe-final.mp3") // estuve probando con un tema que tenia en mi compu XD, esta sujeto a cambios, es solo una prueba
-            fondo.image("casino\\salon-casino-batalla.png")
-            obstaculos.limpiar()
-            obstaculos.bloquearZona(4, 11, 8, 11)
-            self.cargarParedes()
-            self.cargarMesas()
-            self.cargarPlantas()
+        [lluviaDeCartas].filter({ l => not l.estaJugando() }).forEach({ l => self.prepararPelea() })
+    }
 
-            miniJefe.position(game.at(6, 8))
+    method prepararPelea() {
+        musica.cambiarA("sonidos\\jefe-final.mp3") // estuve probando con un tema que tenia en mi compu XD, esta sujeto a cambios, es solo una prueba
+        fondo.image("casino\\salon-casino-batalla.png")
+        obstaculos.limpiar()
+        obstaculos.bloquearZona(4, 11, 8, 11)
+        self.cargarParedes()
+        self.cargarMesas()
+        self.cargarPlantas()
 
-            if (not game.hasVisual(miniJefe)) {
-                game.addVisual(miniJefe)
-            }
+        miniJefe.position(game.at(6, 8))
 
-            lluviaDeCartas.iniciar()
-        }
+        [miniJefe].filter({ m => not game.hasVisual(m) }).forEach({ m => game.addVisual(m) })
 
-        //game.onCollideDo(personaje, {elemento => elemento.chocarConPersonaje()})
+        lluviaDeCartas.iniciar()
     }
 
     method cargarParedes() {
@@ -226,19 +223,17 @@ object salidaDadosACasino {
 }
 
 object encuentroMiniJefe {
-    const fichasNecesarias = 500
-
     method activaEn(pos) =
         (pos.x() - miniJefe.position().x()).between(-1, 2) and
         (pos.y() - miniJefe.position().y()).between(-1, 3)
 
     method usar() {
-        const puedePasar = billetera.tieneAlMenos(fichasNecesarias)
+        const puedePasar = billetera.tieneAlMenos(dificultad.actual().fichasParaElJefe())
         [self].filter({ e => puedePasar }).forEach({ e => juego.irA(escenarioPelea, game.at(7, 1)) })
         [self].filter({ e => not puedePasar }).forEach({ e => e.advertir() })
     }
 
     method advertir() {
-        game.say(miniJefe, "cuchame una cosa robert, necesitas de minimo 500 fichas para pelear conmigo")
+        game.say(miniJefe, "cuchame una cosa robert, necesitas de minimo " + dificultad.actual().fichasParaElJefe() + " fichas para pelear conmigo")
     }
 }
