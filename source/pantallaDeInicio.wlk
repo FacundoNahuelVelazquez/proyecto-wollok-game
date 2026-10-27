@@ -13,6 +13,12 @@ object pantallaGameOver {
     method position() = game.origin()
 }
 
+object pantallaVictoria {
+    method position() = game.origin()
+    
+    method image() = "casino\\game-win.png" 
+}
+
 object pantallaControles {
     method image() = "casino\\Controles.png" 
     method position() = game.origin()

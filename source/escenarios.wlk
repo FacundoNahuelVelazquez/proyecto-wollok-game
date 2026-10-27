@@ -241,6 +241,6 @@ object encuentroMiniJefe {
     }
 
     method advertir() {
-        game.say(miniJefe, "cuchame una cosa robert, necesitas de minimo " + dificultad.actual().fichasParaElJefe() + " fichas para pelear conmigo")
+        game.say(miniJefe, "cuchame una cosa robert, necesitas " + dificultad.actual().fichasParaElJefe() + " fichas para pelear conmigo")
     }
 }

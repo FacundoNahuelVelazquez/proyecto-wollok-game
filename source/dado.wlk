@@ -69,7 +69,7 @@ object mensajeDado {
     method textColor() = "FFD700"
 }
 
-// renglón de abajo: opciones para elegir
+// renglon de abajo: opciones para elegir
 object opcionesDado {
     var property text = ""
 

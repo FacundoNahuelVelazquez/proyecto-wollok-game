@@ -23,7 +23,7 @@ object dialogoBuenasFichas {
 object dialogoMuchasFichas {
     method aplica(saldo) = saldo >= 1400
 
-    method texto() = "segui asi robert! igual tene precaucion, no te vayas a quedar sin plata jajaj"
+    method texto() = "segui asi robert! igual tene precaucion, no te vayas a quedar sin plata"
 }
 
 object npcVasos {

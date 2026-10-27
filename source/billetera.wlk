@@ -26,13 +26,12 @@ object billetera {
     }
 
     method premiarEsquivaCarta(columnaCarta, columnaJugadorAlAparecer, movimientosAlAparecer, columnaJugadorActual, movimientosActuales) {
-        // Te da la plata siempre que una carta llegue sana y salva al fondo
         //self.sumar(20) 
     }
 
     method puedeApostar(monto) = saldo >= monto
 
-    method meta() = dificultad.actual().meta()
+    method meta() = 2000
 
     method alcanzoLaMeta() = saldo >= self.meta()
 

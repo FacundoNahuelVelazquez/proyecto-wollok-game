@@ -31,7 +31,6 @@ object juego {
 
         self.irA(escenarioCasino, game.at(7, 1))
 
-        //game.addVisual(casino)
         menuInicio.configurar()
         personaje.bloquear()
 
@@ -80,21 +79,40 @@ object juego {
         miniJefe.detenerMovimiento()
         miniJefe.position(game.at(6, 7))
         billetera.sumar(200)
-        self.irA(escenarioCasino, game.at(7, 1))
+        if (billetera.alcanzoLaMeta()) {
+            self.mostrarVictoria()
+        } else {
+            self.irA(escenarioCasino, game.at(7, 1))
+        }
+    }
+
+    method mostrarVictoria() {
+        personaje.bloquear()
+        if (not game.hasVisual(pantallaVictoria)) {
+            game.addVisual(pantallaVictoria)
+        }
     }
 
     method reiniciar() {
-        [pantallaGameOver].filter({ p => game.hasVisual(p) }).forEach({ p => self.volverAEmpezar() })
+        if (game.hasVisual(pantallaGameOver) or game.hasVisual(pantallaVictoria)) {
+            self.volverAEmpezar()
+        }
     }
 
     method volverAEmpezar() {
-        game.removeVisual(pantallaGameOver)
+        if (game.hasVisual(pantallaGameOver)) {
+            game.removeVisual(pantallaGameOver)
+        }
+        if (game.hasVisual(pantallaVictoria)) {
+            game.removeVisual(pantallaVictoria)
+        }
+        
         billetera.reiniciar()
-        lluviaDeCartas.finalizar()
-
+        lluviaDeCartas.finalizar() 
+        
         miniJefe.detenerMovimiento()
-        miniJefe.position(game.at(6, 7))
-
+        miniJefe.position(game.at(6, 7)) 
+        
         self.irA(escenarioCasino, game.at(7, 1))
         personaje.liberar()
     }
