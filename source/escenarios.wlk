@@ -82,7 +82,7 @@ object escenarioVasos {
     method salidas() = [salidaVasosACasino, encuentroNpcVasos]
 
     method cargar() {
-        musica.cambiarA("sonidos\\vasos.mp3")  // falta agregar una cancion
+        musica.cambiarA("sonidos\\vasos.mp3") 
         fondo.image("casino\\escenario-vasos.png")
         obstaculos.limpiar()
         self.cargarParedes()
@@ -185,7 +185,7 @@ object escenarioDados {
     method salidas() = [salidaDadosACasino]
 
     method cargar() {
-        musica.cambiarA("sonidos\\dados.mp3")  // falta agregar algun tema aca tambien :3
+        musica.cambiarA("sonidos\\dados.mp3") 
         fondo.image("casino\\tablero-dados.png")
         obstaculos.limpiar()
         self.cargarParedes()

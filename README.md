@@ -1,4 +1,6 @@
-# Casino
+<section align = "center", id = "controles">
+    <img src="casino-poster-game.png" width="500px" />   
+</section> <br> <br>
 
 ## Equipo de desarrollo
 
@@ -10,9 +12,9 @@
 
 ## Capturas
 
-<section align = "center", id = "controles">
+<!-- <section align = "center", id = "controles">
     <img src="casino-poster-game.png" width="500px" />   
-</section> <br> <br>
+</section> <br> <br> -->
 
 ## Reglas de Juego / Instrucciones
 
@@ -72,6 +74,12 @@ Juego 3: Sigue el vaso.
         Apuesta $100 -> acierta: +$100 / falla: -$100
         Apuesta $200 -> acierta: +$200 / falla: -$200
 
+
+## Personajes
+
+<!-- <section align = "center", id = "controles">
+    <img src="assets/robert/jugador-robert-sur-chiquito.png" width="500px" />   
+</section> <br> <br>  -->
 
 ## Otros
 
