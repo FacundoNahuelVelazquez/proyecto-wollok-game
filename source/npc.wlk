@@ -1,7 +1,7 @@
 import wollok.game.*
 import billetera.*
 
-// diálogos según las fichas del jugador (los textos van de ejemplo, después los cambiás)
+// los dialogos estan sujeto a cambios
 object dialogoPocasFichas {
     method aplica(saldo) = saldo < 200
 
