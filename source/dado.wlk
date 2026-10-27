@@ -49,7 +49,7 @@ object apuestaMenorOIgualA3 inherits Apuesta {
 object panelDado {
     method position() = game.at(3, 4)
 
-    method image() = "casino\\panel-vasos.png"
+    method image() = "casino//panel-vasos.png"
 }
 
 object dadoVisual {
@@ -57,7 +57,7 @@ object dadoVisual {
 
     method position() = game.at(7, 5)
 
-    method image() = "casino\\dado-" + valor + ".png"
+    method image() = "casino//dado-" + valor + ".png"
 }
 
 // renglón de arriba: títulos y resultados

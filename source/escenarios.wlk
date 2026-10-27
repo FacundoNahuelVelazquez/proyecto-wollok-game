@@ -21,8 +21,8 @@ object escenarioCasino {
     method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados]
 
     method cargar() {
-        musica.cambiarA("sonidos\\Casino-game-ambiente1.mp3")
-        fondo.image("casino\\casino-tablero.png")
+        musica.cambiarA("sonidos//Casino-game-ambiente1.mp3")
+        fondo.image("casino//casino-tablero.png")
         obstaculos.limpiar()
         self.cargarCrupier()
         self.cargarParedes()
@@ -82,8 +82,8 @@ object escenarioVasos {
     method salidas() = [salidaVasosACasino, encuentroNpcVasos]
 
     method cargar() {
-        musica.cambiarA("sonidos\\vasos.mp3") 
-        fondo.image("casino\\escenario-vasos.png")
+        musica.cambiarA("sonidos//vasos.mp3") 
+        fondo.image("casino//escenario-vasos.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarEscenario()
@@ -141,8 +141,8 @@ object escenarioPelea {
     }
 
     method prepararPelea() {
-        musica.cambiarA("sonidos\\jefe-final.mp3") // estuve probando con un tema que tenia en mi compu XD, esta sujeto a cambios, es solo una prueba
-        fondo.image("casino\\salon-casino-batalla.png")
+        musica.cambiarA("sonidos//jefe-final.mp3") // estuve probando con un tema que tenia en mi compu XD, esta sujeto a cambios, es solo una prueba
+        fondo.image("casino//salon-casino-batalla.png")
         obstaculos.limpiar()
         obstaculos.bloquearZona(4, 11, 8, 11)
         self.cargarParedes()
@@ -185,8 +185,8 @@ object escenarioDados {
     method salidas() = [salidaDadosACasino]
 
     method cargar() {
-        musica.cambiarA("sonidos\\dados.mp3") 
-        fondo.image("casino\\tablero-dados.png")
+        musica.cambiarA("sonidos//dados.mp3") 
+        fondo.image("casino//tablero-dados.png")
         obstaculos.limpiar()
         self.cargarParedes()
         self.cargarMesa()

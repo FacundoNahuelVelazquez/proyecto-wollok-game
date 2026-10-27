@@ -32,7 +32,7 @@ object npcVasos {
 
     method position() = game.at(13, 8)
 
-    method image() = "casino\\npc1.png"
+    method image() = "casino//npc1.png"
 
     method dialogoActual() = dialogos.find({ d => d.aplica(billetera.saldo()) })
 

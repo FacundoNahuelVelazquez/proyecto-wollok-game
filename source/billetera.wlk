@@ -45,7 +45,7 @@ object billetera {
 object marcadorFondo {
     method position() = game.at(0, 11)
 
-    method image() = "casino\\marcador-fondo.png"
+    method image() = "casino//marcador-fondo.png"
 }
 
 object marcador {

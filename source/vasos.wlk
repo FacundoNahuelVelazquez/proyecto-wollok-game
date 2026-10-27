@@ -9,7 +9,7 @@ class Vaso {
     var property position
     var property tienePremio = false
 
-    method image() = "casino\\vaso.png"
+    method image() = "casino//vaso.png"
 
     method levantar() {
         position = position.up(1)
@@ -30,13 +30,13 @@ class Vaso {
 object panelVasos {
     method position() = game.at(3, 4)
 
-    method image() = "casino\\panel-vasos.png"
+    method image() = "casino//panel-vasos.png"
 }
 
 object premioVaso {
     var property position = game.at(4, 5)
 
-    method image() = "casino\\premio-vaso.png"
+    method image() = "casino//premio-vaso.png"
 }
 
 object mensajeVasos {
