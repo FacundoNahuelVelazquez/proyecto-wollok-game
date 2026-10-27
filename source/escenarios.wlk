@@ -7,6 +7,7 @@ import lluviadecartas.*
 import billetera.*
 import musica.*
 import dificultad.*
+import npc.*
 
 
 
@@ -78,7 +79,7 @@ object salidaVasosACasino {
 }
 
 object escenarioVasos {
-    method salidas() = [salidaVasosACasino]
+    method salidas() = [salidaVasosACasino, encuentroNpcVasos]
 
     method cargar() {
         musica.cambiarA("sonidos\\vasos.mp3")  // falta agregar una cancion
@@ -88,6 +89,8 @@ object escenarioVasos {
         self.cargarEscenario()
         self.cargarMesas()
         self.cargarBarra()
+        self.cargarNpc()
+        [npcVasos].filter({ n => not game.hasVisual(n) }).forEach({ n => game.addVisual(n) })
     }
 
     method cargarParedes() {
@@ -118,6 +121,10 @@ object escenarioVasos {
     method cargarBarra() {
         obstaculos.bloquearZona(11, 15, 0, 3)   // barra y estantes
         obstaculos.bloquearZona(10, 10, 1, 2)  // banquetas de la barra
+    }
+
+    method cargarNpc() {
+        obstaculos.bloquearZona(13, 14, 7, 9)     // hitbox del NPC: su cuerpo y la fila de abajo, para que Robert no se le superponga
     }
 }
 

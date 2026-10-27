@@ -8,6 +8,7 @@ import billetera.*
 import miniJefe.*
 import lluviadecartas.*
 import dificultad.*
+import npc.*
 
 
 object juego {
@@ -55,7 +56,7 @@ object juego {
     }
 
     method irA(escenario, posicionInicial) {
-        [miniJefe].filter({ m => game.hasVisual(m) }).forEach({ m => game.removeVisual(m) })
+        [miniJefe, npcVasos].filter({ v => game.hasVisual(v) }).forEach({ v => game.removeVisual(v) })
         escenarioActual = escenario
         escenario.cargar()
         personaje.position(posicionInicial)
