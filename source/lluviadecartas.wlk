@@ -21,6 +21,8 @@ class PatronColumnasImpares inherits PatronDeLluvia {
 
 object lluviaDeCartas {
     const duracion = 60
+    const gananciaPorSegundo = 10
+    const intervaloMonedas = 5000
     const primeraColumna = 2
     const cantidadColumnas = 12
     const filaDeCaida = 9
@@ -57,14 +59,14 @@ object lluviaDeCartas {
         game.onTick(modo.intervaloLanzamiento(), "lanzamientoCartas", { self.lanzarCartas() })
         game.onTick(500, "patronesLluvia", { self.actualizarPatrones() })
         game.onTick(1000, "quietudLluvia", { self.controlarQuietud() })
-        game.onTick(modo.intervaloMonedas(), "aparicionMonedas", { self.lanzarMoneda() })
+        game.onTick(intervaloMonedas, "aparicionMonedas", { self.lanzarMoneda() })
         game.onTick(modo.intervaloMovimiento(), "movimientoLluvia", { self.actualizarObjetos() })
     }
 
     method actualizarRonda() {
         if (jugando) {
             contadorRonda.pasarSegundo()
-            billetera.sumar(dificultad.actual().gananciaPorSegundo())
+            billetera.sumar(gananciaPorSegundo)
             if (contadorRonda.seAcabo()) {
                 game.schedule(50, {
                     self.finalizar()
@@ -240,3 +242,4 @@ object contadorRonda {
 
     method seAcabo() = segundosRestantes == 0
 }
+

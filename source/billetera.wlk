@@ -2,7 +2,7 @@ import wollok.game.*
 import dificultad.*
 
 object billetera {
-    const recompensaMoneda = 50
+    const recompensaMoneda = 10
     var saldo = 100
 
     method tieneAlMenos(monto) = saldo >= monto
@@ -26,7 +26,7 @@ object billetera {
     }
 
     method premiarEsquivaCarta(columnaCarta, columnaJugadorAlAparecer, movimientosAlAparecer, columnaJugadorActual, movimientosActuales) {
-        self.sumar(20) 
+        // sin premio por esquivar: la ganancia de la pelea es solo por segundo
     }
 
     method puedeApostar(monto) = saldo >= monto
