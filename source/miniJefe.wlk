@@ -8,7 +8,7 @@ object miniJefe {
     var seEstaMoviendo = false
 //    var estaAtacando = false
 
-    method image() = "mini-jefe-crupier//crupier-mini-jefe-chiquito.png"
+    method image() = "mini-jefe-crupier/crupier-mini-jefe-chiquito.png"
 
     // method iniciarAtaque() {
     //     if (!estaAtacando) {

@@ -1,14 +1,14 @@
 import wollok.game.*
 
 object casino {
-    method image() = "casino//casino-poster-inicio.png"
+    method image() = "casino/casino-poster-inicio.png"
     method position() = game.origin()
     
     method siguiente() = pantallaControles 
 }
 
 object pantallaGameOver {
-    method image() = "casino//game-over.png"
+    method image() = "casino/game-over.png"
 
     method position() = game.origin()
 }
@@ -16,11 +16,11 @@ object pantallaGameOver {
 object pantallaVictoria {
     method position() = game.origin()
     
-    method image() = "casino//game-win.png" 
+    method image() = "casino/game-win.png" 
 }
 
 object pantallaControles {
-    method image() = "casino//Controles.png" 
+    method image() = "casino/Controles.png" 
     method position() = game.origin()
     
     method siguiente() = casino 

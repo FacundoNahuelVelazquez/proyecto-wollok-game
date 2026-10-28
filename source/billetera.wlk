@@ -26,7 +26,7 @@ object billetera {
     }
 
     method premiarEsquivaCarta(columnaCarta, columnaJugadorAlAparecer, movimientosAlAparecer, columnaJugadorActual, movimientosActuales) {
-        //self.sumar(20) 
+        self.sumar(20) 
     }
 
     method puedeApostar(monto) = saldo >= monto
@@ -45,7 +45,7 @@ object billetera {
 object marcadorFondo {
     method position() = game.at(0, 11)
 
-    method image() = "casino//marcador-fondo.png"
+    method image() = "casino/marcador-fondo.png"
 }
 
 object marcador {

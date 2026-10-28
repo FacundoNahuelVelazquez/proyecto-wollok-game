@@ -118,24 +118,24 @@ class Carta inherits ObjetoLluvia {
 }
 
 class CartaNormal inherits Carta {
-    override method image() = "mini-jefe-crupier//carta-crupier-mini.png"
+    override method image() = "mini-jefe-crupier/carta-crupier-mini.png"
     override method danio() = 50
 }
 
 class CartaEspecial inherits Carta {
-    override method image() = "mini-jefe-crupier//carta-super-crupier-mini.png"
+    override method image() = "mini-jefe-crupier/carta-super-crupier-mini.png"
     override method danio() = 100
     override method movimientosPorCasilla() = 1
 }
 
 class CartaRapida inherits CartaNormal {
-    override method image() = "mini-jefe-crupier//carta-crupier-rapida.png"
+    override method image() = "mini-jefe-crupier/carta-crupier-rapida.png"
     override method danio() = 75
     override method movimientosPorCasilla() = 1
 }
 
 class Moneda inherits ObjetoLluvia {
-    override method image() = "casino//premio-vaso.png"
+    override method image() = "casino/premio-vaso.png"
 
     override method iniciar() {
         game.schedule(8000, { self.retirar() })
