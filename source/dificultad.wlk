@@ -25,8 +25,9 @@ object modoNormal {
     method multiplicadorNumero() = 5
     method multiplicadorRango() = 1.8
 
-    method danioCartaNormal() = 25
-    method danioCartaRapida() = 50
+    method danioCartaNormal() = 50
+    method danioCartaRapida() = 75
+    method danioCartaEspecial() = 100
     method gananciaPorSegundo() = 10
     method intervaloLanzamiento() = 500
     method intervaloMovimiento() = 200
@@ -41,7 +42,7 @@ object modoDificil {
     method siguiente() = modoNormal
 
     method saldoInicial() = 100
-    method meta() = 3000
+    method meta() = 2000
     method fichasParaElJefe() = 800
 
     method intercambiosVasos() = 9
@@ -53,8 +54,9 @@ object modoDificil {
     method multiplicadorNumero() = 4
     method multiplicadorRango() = 1.5
 
-    method danioCartaNormal() = 35
-    method danioCartaRapida() = 75
+    method danioCartaNormal() = 100
+    method danioCartaRapida() = 150
+    method danioCartaEspecial() = 200
     method gananciaPorSegundo() = 7
     method intervaloLanzamiento() = 350
     method intervaloMovimiento() = 140
