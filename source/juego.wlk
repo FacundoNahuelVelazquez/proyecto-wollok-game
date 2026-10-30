@@ -55,7 +55,7 @@ object juego {
     }
 
     method irA(escenario, posicionInicial) {
-        [miniJefe, npcVasos].filter({ v => game.hasVisual(v) }).forEach({ v => game.removeVisual(v) })
+        [miniJefe, npcVasos, monedaFuente].filter({ v => game.hasVisual(v) }).forEach({ v => game.removeVisual(v) })
         escenarioActual = escenario
         escenario.cargar()
         personaje.position(posicionInicial)

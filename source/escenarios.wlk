@@ -246,16 +246,21 @@ object encuentroMiniJefe {
 }
 
 object escenarioPlaza {
-    method salidas () = [salidaPlazaACasino]
+    method salidas() = [salidaPlazaACasino, encuentroMonedaFuente]
 
-    method cargar ()  {
-    fondo.image("casino/casino-plaza.png")
-    obstaculos.limpiar()
-    self.cargarParedes()
-    self.cargarOtrosObstaculos()
-    self.cargarPlantas()
+    method cargar() {
+        fondo.image("casino/casino-plaza.png")
+        obstaculos.limpiar()
+        self.cargarParedes()
+        self.cargarOtrosObstaculos()
+        self.cargarPlantas()
+        self.cargarMoneda()
     }
 
+    method cargarMoneda() {
+        [monedaFuente].filter({ m => billetera.necesitaMoneda() and not game.hasVisual(m) }).forEach({ m => m.aparecer() })
+    }
+    
     method cargarParedes() {
         obstaculos.bloquearZona(0, 6, 10, 10) // pared superior, parte izquierda
         obstaculos.bloquearZona(9, 15, 10, 10) // pared superior, parte derecha
