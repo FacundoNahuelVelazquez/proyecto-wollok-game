@@ -18,7 +18,7 @@ object fondo {
 }
 
 object escenarioCasino {
-    method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados]
+    method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados, salidaCasinoAPlaza]
 
     method cargar() {
         musica.cambiarA("sonidos/Casino-game-ambiente1.mp3")
@@ -242,5 +242,71 @@ object encuentroMiniJefe {
 
     method advertir() {
         game.say(miniJefe, "cuchame una cosa robert, necesitas " + dificultad.actual().fichasParaElJefe() + " fichas para pelear conmigo")
+    }
+}
+
+object escenarioPlaza {
+    method salidas () = [salidaPlazaACasino]
+
+    method cargar ()  {
+    fondo.image("casino/casino-plaza.png")
+    obstaculos.limpiar()
+    self.cargarParedes()
+    self.cargarOtrosObstaculos()
+    self.cargarPlantas()
+    }
+
+    method cargarParedes() {
+        obstaculos.bloquearZona(0, 6, 10, 10) // pared superior, parte izquierda
+        obstaculos.bloquearZona(9, 15, 10, 10) // pared superior, parte derecha
+        obstaculos.bloquearZona(9, 9, 9, 9) // columna derecha de la entrada
+        obstaculos.bloquearZona(0, 0, 1, 8) // paredes laterales izq.
+        obstaculos.bloquearZona(15, 15, 1, 8) // paredes laterales der.
+        obstaculos.bloquearZona(0, 2, 0, 0)   // Valla inferior izquierda
+        obstaculos.bloquearZona(12, 15, 0, 0) // Valla inferior derecha 
+    }
+
+    method cargarPlantas() {
+        obstaculos.bloquearZona(1, 2, 9, 10) // arbol izq. arriba
+        obstaculos.bloquearZona(13, 14, 9, 10) // arbol der. arriba
+        obstaculos.bloquearZona(0, 1, 5, 6) // arbol izq. abajo
+        obstaculos.bloquearZona(14, 15, 5, 6) // arbol der. abajo
+        obstaculos.bloquearZona(0, 2, 7, 7) // jardinera izq.
+        obstaculos.bloquearZona(13, 15, 7, 7) // jardinera der.
+        obstaculos.bloquearZona(0, 1, 2, 2) // arbustos abajo izq.
+        obstaculos.bloquearZona(14, 15, 2, 2) // arbustos abajo der.
+        obstaculos.bloquearZona(5, 5, 8, 9) // maceta izq.
+        obstaculos.bloquearZona(10, 10, 8, 9) // maceta der.
+    }
+
+    method cargarOtrosObstaculos() {
+        obstaculos.bloquearZona(6, 8, 2, 4) // fuente
+        obstaculos.bloquearZona(1, 1, 5, 6) // banco izq.
+        obstaculos.bloquearZona(14, 14, 5, 6) // banco der.
+        obstaculos.bloquearZona(2, 2, 7, 9) // farol izq. arriba
+        obstaculos.bloquearZona(1, 1, 2, 3) // farol izq. abajo
+        obstaculos.bloquearZona(12, 13, 7, 9) // farol der. arriba
+        obstaculos.bloquearZona(13, 14, 2, 3) // farol der. abajo
+    }
+    
+}
+
+object salidaCasinoAPlaza {
+    const celdas = [game.at(7, 0), game.at(8, 0)]
+
+    method activaEn(pos) = celdas.contains(pos)
+
+    method usar() {
+        juego.irA(escenarioPlaza, game.at(7, 9))
+    }
+}
+
+object salidaPlazaACasino {
+    const celdas = [game.at(7, 10), game.at(8, 10)]
+
+    method activaEn(pos) = celdas.contains(pos)
+
+    method usar() {
+        juego.irA(escenarioCasino, game.at(7, 1))
     }
 }

@@ -81,6 +81,17 @@ Juego 3: Sigue el vaso.
     <img src="assets/robert/jugador-robert-sur-chiquito.png" width="500px" />   
 </section> <br> <br>  -->
 
+## Objetivos pendientes
+
+- Creditos del juego
+- Historia del juego;
+        - Definir  lore
+        - Implementarlo en imagenes y musica
+- Implementación del patio;
+        - Musica
+        - Mecanica de recuperacion de dinero
+
+
 ## Otros
 
 - Curso/Facultad: UNAHUR - Universidad Nacional de Hurlingham
