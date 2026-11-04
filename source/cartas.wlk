@@ -128,6 +128,8 @@ class CartaEspecial inherits Carta {
     override method movimientosPorCasilla() = 1
 }
 
+class CartaBomba inherits CartaEspecial {}
+
 class CartaRapida inherits CartaNormal {
     override method image() = "mini-jefe-crupier/carta-crupier-rapida.png"
     override method danio() = 75

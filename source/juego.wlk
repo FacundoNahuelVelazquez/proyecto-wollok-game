@@ -45,7 +45,7 @@ object juego {
     }
 
     method comenzar() {
-        game.removeVisual(casino)
+        menuInicio.quitarPantallaActual()
         billetera.reiniciar()
         personaje.liberar()
     }
@@ -71,7 +71,7 @@ object juego {
     }
 
     method ponerGameOver() {
-        game.addVisual(pantallaGameOver)
+        menuInicio.cambiarA(pantallaGameOver)
         game.schedule(50, { lluviaDeCartas.finalizar() })
     }
 
@@ -89,23 +89,18 @@ object juego {
     method mostrarVictoria() {
         personaje.bloquear()
         if (not game.hasVisual(pantallaVictoria)) {
-            game.addVisual(pantallaVictoria)
+            menuInicio.cambiarA(pantallaVictoria)
         }
     }
 
     method reiniciar() {
-        if (game.hasVisual(pantallaGameOver) or game.hasVisual(pantallaVictoria)) {
+        if (menuInicio.pantallaFinalActiva()) {
             self.volverAEmpezar()
         }
     }
 
     method volverAEmpezar() {
-        if (game.hasVisual(pantallaGameOver)) {
-            game.removeVisual(pantallaGameOver)
-        }
-        if (game.hasVisual(pantallaVictoria)) {
-            game.removeVisual(pantallaVictoria)
-        }
+        menuInicio.quitarPantallaActual()
         
         billetera.reiniciar()
         lluviaDeCartas.finalizar() 

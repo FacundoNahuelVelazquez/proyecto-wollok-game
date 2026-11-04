@@ -85,7 +85,7 @@ object lluviaDeCartas {
                 segundosQuieto += 1
                 if (segundosQuieto >= dificultad.actual().segundosQuietoMaximo()) {
                     self.lanzarCartaEn(
-                        new CartaRapida(),
+                        new CartaBomba(),
                         personaje.position().x(),
                         filaDeCaida
                     )
@@ -106,7 +106,7 @@ object lluviaDeCartas {
                 self.lanzarCartaAleatoria(new CartaEspecial())
             }
             if (
-                contadorRonda.segundosRestantes() <= 30 and
+                contadorRonda.segundosRestantes() <= 30 &&
                 cantidadLanzamientos % 4 == 0
             ) {
                 self.lanzarCartaAleatoria(new CartaEspecial())
@@ -167,11 +167,11 @@ object lluviaDeCartas {
     }
 
     method posicionValidaParaMoneda(posicion) =
-        posicion.y() < miniJefe.position().y() and
-        not obstaculos.estaBloqueada(posicion) and
-        not (posicion == personaje.position()) and
+        posicion.y() < miniJefe.position().y() &&
+        not obstaculos.estaBloqueada(posicion) &&
+        not (posicion == personaje.position()) &&
         objetos.filter({ elemento =>
-            elemento.estaActivo() and elemento.position() == posicion
+            elemento.estaActivo() && elemento.position() == posicion
         }).isEmpty()
 
     method agregarObjeto(objeto, columna, fila) {
@@ -242,4 +242,3 @@ object contadorRonda {
 
     method seAcabo() = segundosRestantes == 0
 }
-
