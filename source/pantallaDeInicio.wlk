@@ -65,15 +65,9 @@ object pantallaControles inherits Pantalla {
 object pantallaCreditos inherits Pantalla {
     var pantallaAnterior = casino
 
-    override method image() = "casino/casino-plaza.png"
+    override method image() = "casino/CreditosCodeTeam.png" 
+    
     override method position() = game.origin()
-    override method mostrarExtras() {
-        creditosEquipo.mostrar()
-    }
-
-    override method ocultarExtras() {
-        creditosEquipo.ocultar()
-    }
 
     override method alPresionarC() {
         self.irA(pantallaAnterior)
@@ -90,24 +84,24 @@ object pantallaCreditos inherits Pantalla {
     }
 }
 
-object creditosEquipo {
-    method mostrar() {
-        [tituloCreditos, creditoNehuen, creditoFacundo, creditoUriel, creditoLucas, creditoJeanPaul, volverCreditos]
-            .forEach({ credito => game.addVisual(credito) })
-    }
+// object creditosEquipo {
+//     method mostrar() {
+//         [tituloCreditos, creditoNehuen, creditoFacundo, creditoUriel, creditoLucas, creditoJeanPaul, volverCreditos]
+//             .forEach({ credito => game.addVisual(credito) })
+//     }
 
-    method ocultar() {
-        [tituloCreditos, creditoNehuen, creditoFacundo, creditoUriel, creditoLucas, creditoJeanPaul, volverCreditos]
-            .filter({ credito => game.hasVisual(credito) })
-            .forEach({ credito => game.removeVisual(credito) })
-    }
-}
+//     method ocultar() {
+//         [tituloCreditos, creditoNehuen, creditoFacundo, creditoUriel, creditoLucas, creditoJeanPaul, volverCreditos]
+//             .filter({ credito => game.hasVisual(credito) })
+//             .forEach({ credito => game.removeVisual(credito) })
+//     }
+// }
 
-object tituloCreditos {
-    method text() = "CRÉDITOS"
-    method textColor() = "FFD700"
-    method position() = game.at(4, 9)
-}
+// object tituloCreditos {
+//     method text() = "CRÉDITOS"
+//     method textColor() = "FFD700"
+//     method position() = game.at(4, 9)
+// }
 
 object indicacionCreditos {
     method text() = "V: ver creditos"
@@ -115,41 +109,41 @@ object indicacionCreditos {
     method position() = game.at(5, 1)
 }
 
-object volverCreditos {
-    method text() = "V: volver"
-    method textColor() = "FFD700"
-    method position() = game.at(4, 3)
-}
+// object volverCreditos {
+//     method text() = "V: volver"
+//     method textColor() = "FFD700"
+//     method position() = game.at(4, 3)
+// }
 
-object creditoNehuen {
-    method text() = "Nehuen Rodriguez"
-    method textColor() = "FFFFFF"
-    method position() = game.at(4, 8)
-}
+// object creditoNehuen {
+//     method text() = "Nehuen Rodriguez"
+//     method textColor() = "FFFFFF"
+//     method position() = game.at(4, 8)
+// }
 
-object creditoFacundo {
-    method text() = "Facundo Velazquez"
-    method textColor() = "FFFFFF"
-    method position() = game.at(4, 7)
-}
+// object creditoFacundo {
+//     method text() = "Facundo Velazquez"
+//     method textColor() = "FFFFFF"
+//     method position() = game.at(4, 7)
+// }
 
-object creditoUriel {
-    method text() = "Uriel Garay"
-    method textColor() = "FFFFFF"
-    method position() = game.at(4, 6)
-}
+// object creditoUriel {
+//     method text() = "Uriel Garay"
+//     method textColor() = "FFFFFF"
+//     method position() = game.at(4, 6)
+// }
 
-object creditoLucas {
-    method text() = "Lucas Mogro"
-    method textColor() = "FFFFFF"
-    method position() = game.at(4, 5)
-}
+// object creditoLucas {
+//     method text() = "Lucas Mogro"
+//     method textColor() = "FFFFFF"
+//     method position() = game.at(4, 5)
+// }
 
-object creditoJeanPaul {
-    method text() = "Jean-Paul Bittencourt"
-    method textColor() = "FFFFFF"
-    method position() = game.at(4, 4)
-}
+// object creditoJeanPaul {
+//     method text() = "Jean-Paul Bittencourt"
+//     method textColor() = "FFFFFF"
+//     method position() = game.at(4, 4)
+// }
 
 object menuInicio {
     var pantallaActual = casino
