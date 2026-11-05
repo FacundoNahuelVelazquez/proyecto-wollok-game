@@ -85,7 +85,7 @@ object lluviaDeCartas {
                 segundosQuieto += 1
                 if (segundosQuieto >= dificultad.actual().segundosQuietoMaximo()) {
                     self.lanzarCartaEn(
-                        new CartaBomba(),
+                        new CartaRapida(),
                         personaje.position().x(),
                         filaDeCaida
                     )

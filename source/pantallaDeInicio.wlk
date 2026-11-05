@@ -156,7 +156,7 @@ object menuInicio {
 
     method configurar() {
         game.addVisual(pantallaActual)
-        
+        keyboard.c().onPressDo { self.alternarPantalla() } 
         keyboard.v().onPressDo { pantallaActual.alPresionarV() }
     }
 
@@ -176,6 +176,15 @@ object menuInicio {
             game.removeVisual(pantallaActual)
         }
         pantallaActual = casino
+    }
+
+    method alternarPantalla() {
+        [pantallaActual].filter({ p => game.hasVisual(p) }).forEach({ p =>
+            self.quitarPantallaActual()
+            pantallaActual = p.siguiente() 
+            game.addVisual(pantallaActual)
+            pantallaActual.mostrarExtras()
+        })
     }
 
     method pantallaFinalActiva() = pantallaActual.representaFinal()
