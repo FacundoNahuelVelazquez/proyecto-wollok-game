@@ -34,7 +34,7 @@ object juego {
         menuInicio.configurar()
         personaje.bloquear()
 
-        keyboard.enter().onPressDo { self.empezarPartida() }
+        keyboard.enter().onPressDo { menuInicio.alPresionarEnter() }
         keyboard.h().onPressDo { self.cambiarDificultad() }
 
         game.start()
@@ -45,7 +45,7 @@ object juego {
     }
 
     method comenzar() {
-        menuInicio.quitarPantallaActual()
+        game.removeVisual(casino)
         billetera.reiniciar()
         personaje.liberar()
     }
@@ -61,6 +61,7 @@ object juego {
         personaje.position(posicionInicial)
     }
 
+    // ---------- derrota ----------
     method verificarQuiebra() {
         [billetera].filter({ b => b.estaEnQuiebra() }).forEach({ b => self.mostrarGameOver() })
     }
@@ -75,41 +76,40 @@ object juego {
         game.schedule(50, { lluviaDeCartas.finalizar() })
     }
 
-    method detenerMiniJefe() {
-        miniJefe.detenerMovimiento()
-        miniJefe.position(game.at(6, 7))
-        billetera.sumar(200)
-        if (billetera.alcanzoLaMeta()) {
-            self.mostrarVictoria()
-        } else {
-            self.irA(escenarioCasino, game.at(7, 1))
-        }
+    method reiniciar() {
+        [pantallaGameOver].filter({ p => game.hasVisual(p) }).forEach({ p => self.volverAEmpezar() })
+    }
+
+    // ---------- victoria ----------
+    method verificarVictoria() {
+        [billetera].filter({ b => b.alcanzoLaMeta() }).forEach({ b => self.mostrarVictoria() })
     }
 
     method mostrarVictoria() {
         personaje.bloquear()
-        if (not game.hasVisual(pantallaVictoria)) {
-            menuInicio.cambiarA(pantallaVictoria)
-        }
+        [pantallaVictoria].filter({ v => not game.hasVisual(v) }).forEach({ v => menuInicio.cambiarA(v) })
     }
 
-    method reiniciar() {
-        if (menuInicio.pantallaFinalActiva()) {
-            self.volverAEmpezar()
-        }
-    }
-
+    // ---------- reinicio (desde game over o desde los créditos finales) ----------
     method volverAEmpezar() {
         menuInicio.quitarPantallaActual()
-        
+        self.reiniciarTodo()
+    }
+
+    method reiniciarTodo() {
         billetera.reiniciar()
-        lluviaDeCartas.finalizar() 
-        
+        lluviaDeCartas.finalizar()
         miniJefe.detenerMovimiento()
-        miniJefe.position(game.at(6, 7)) 
-        
+        miniJefe.position(game.at(6, 7)) // six seven, six seven, six seven
         self.irA(escenarioCasino, game.at(7, 1))
         personaje.liberar()
+    }
+
+    method detenerMiniJefe() {
+        miniJefe.detenerMovimiento()
+        miniJefe.position(game.at(6, 7))
+        self.irA(escenarioCasino, game.at(7, 1))
+        self.verificarVictoria()
     }
 
     method estaEn(escenario) = escenarioActual == escenario
