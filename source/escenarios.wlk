@@ -249,6 +249,7 @@ object escenarioPlaza {
     method salidas() = [salidaPlazaACasino, encuentroMonedaFuente]
 
     method cargar() {
+        musica.cambiarA("sonidos/viento.mp3")
         fondo.image("casino/casino-plaza.png")
         obstaculos.limpiar()
         self.cargarParedes()
