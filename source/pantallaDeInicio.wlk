@@ -9,6 +9,7 @@ class Pantalla {
     method siguiente() = self
     method alPresionarC() {}
     method alPresionarEnter() {}
+    method alPresionarEspacio() {}
     method alPresionarV() {
         if (game.hasVisual(self)) {
             pantallaCreditos.volverA(self)
@@ -35,7 +36,33 @@ object casino inherits Pantalla {
     }
 
     override method alPresionarEnter() {
-        juego.empezarPartida()
+        self.irA(cinematica1)
+    }
+}
+
+object cinematica1 inherits Pantalla {
+    override method image() = "casino/cinematica1.png"
+    override method position() = game.origin()
+
+    override method alPresionarEspacio() {
+        self.irA(cinematica2)
+    }
+
+    override method alPresionarEnter() {
+        [self].filter({ p => p.estaVisible() }).forEach({ p => juego.comenzar() })
+    }
+}
+
+object cinematica2 inherits Pantalla {
+    override method image() = "casino/cinematica2.png"
+    override method position() = game.origin()
+
+    override method alPresionarEspacio() {
+        [self].filter({ p => p.estaVisible() }).forEach({ p => juego.comenzar() })
+    }
+
+    override method alPresionarEnter() {
+        [self].filter({ p => p.estaVisible() }).forEach({ p => juego.comenzar() })
     }
 }
 
@@ -116,6 +143,7 @@ object menuInicio {
         game.addVisual(pantallaActual)
         keyboard.c().onPressDo { self.alternarPantalla() }
         keyboard.v().onPressDo { pantallaActual.alPresionarV() }
+        keyboard.space().onPressDo { pantallaActual.alPresionarEspacio() }
     }
 
     method alPresionarEnter() {

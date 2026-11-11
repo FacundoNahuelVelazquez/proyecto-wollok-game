@@ -45,11 +45,11 @@ object juego {
     }
 
     method comenzar() {
-        game.removeVisual(casino)
+        menuInicio.quitarPantallaActual()
         billetera.reiniciar()
         personaje.liberar()
     }
-
+    
     method cambiarDificultad() {
         [casino].filter({ p => game.hasVisual(p) }).forEach({ p => dificultad.alternar() })
     }
