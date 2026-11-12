@@ -86,14 +86,6 @@ object pantallaVictoria inherits Pantalla {
 object pantallaControles inherits Pantalla {
     override method image() = "casino/Controles.png"
     override method position() = game.origin()
-    override method mostrarExtras() {
-        game.addVisual(indicacionCreditos)
-    }
-
-    override method ocultarExtras() {
-        game.removeVisual(indicacionCreditos)
-    }
-
     override method siguiente() = casino
     override method alPresionarC() {
         self.irA(self.siguiente())
@@ -125,15 +117,6 @@ object pantallaCreditos inherits Pantalla {
         pantallaAnterior = pantalla
     }
 }
-
-
-
-object indicacionCreditos {
-    method text() = "V: ver creditos"
-    method textColor() = "FFD700"
-    method position() = game.at(5, 1)
-}
-
 
 
 object menuInicio {

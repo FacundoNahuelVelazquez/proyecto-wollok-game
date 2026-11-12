@@ -100,7 +100,7 @@ object juego {
         billetera.reiniciar()
         lluviaDeCartas.finalizar()
         miniJefe.detenerMovimiento()
-        miniJefe.position(game.at(6, 7)) // six seven, six seven, six seven
+        miniJefe.position(game.at(6, 7)) 
         self.irA(escenarioCasino, game.at(7, 1))
         personaje.liberar()
     }
