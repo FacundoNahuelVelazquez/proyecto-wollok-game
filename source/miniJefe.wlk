@@ -6,23 +6,8 @@ object miniJefe {
     var property position = game.at(6, 7)
     var direccion = 1
     var seEstaMoviendo = false
-//    var estaAtacando = false
 
     method image() = "mini-jefe-crupier/crupier-mini-jefe-chiquito.png"
-
-    // method iniciarAtaque() {
-    //     if (!estaAtacando) {
-    //         estaAtacando = true
-    //         game.onTick(300, "movimiento_jefe", { self.mover() })
-    //     }
-    // }
-
-    // method detenerAtaque() {
-    //     if (estaAtacando) {
-    //         game.removeTickEvent("movimiento_jefe")
-    //         estaAtacando = false
-    //     }
-    // }
 
     method iniciarMovimiento() {
         if (not seEstaMoviendo) {
@@ -48,5 +33,4 @@ object miniJefe {
         }
     }
 
-    method chocarConPersonaje() {} // sacar 
 }

@@ -145,7 +145,7 @@ object juegoDado {
         game.addVisual(dadoVisual)
         game.addVisual(mensajeDado)
         game.addVisual(opcionesDado)
-        mensajeDado.text("¿Cuánto apostás? (E cancela)")
+        mensajeDado.text("¿Cuánto apostás? (E cancelar)")
         opcionesDado.text("1 - $50     2 - $100     3 - $200")
         fase = faseDadoMonto
     }
