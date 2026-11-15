@@ -17,17 +17,44 @@ object fondo {
     method position() = game.origin()
 }
 
-object escenarioCasino {
-    method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados, salidaCasinoAPlaza]
+// ---------- clase madre de todos los mapas ----------
+class Escenario {
+    method imagen()
+    method cancion()
+    method salidas()
+    method cargarObstaculos()
+
+    method alCargar() {}
+
+    method puedeCargar() = true
 
     method cargar() {
-        musica.cambiarA("sonidos/Casino-game-ambiente1.mp3")
-        fondo.image("casino/casino-tablero.png")
+        [self].filter({ e => e.puedeCargar() }).forEach({ e => e.prepararMapa() })
+    }
+
+    method prepararMapa() {
+        musica.cambiarA(self.cancion())
+        fondo.image(self.imagen())
         obstaculos.limpiar()
+        self.cargarObstaculos()
+        self.alCargar()
+    }
+}
+
+// ---------- casino ----------
+object escenarioCasino inherits Escenario {
+    override method imagen() = "casino/casino-tablero.png"
+    override method cancion() = "sonidos/Casino-game-ambiente1.mp3"
+    override method salidas() = [salidaCasinoAVasos, encuentroMiniJefe, salidaCasinoADados, salidaCasinoAPlaza]
+
+    override method cargarObstaculos() {
         self.cargarCrupier()
         self.cargarParedes()
         self.cargarMesas()
         self.cargarMaquinitas()
+    }
+
+    override method alCargar() {
         [miniJefe].filter({ m => not game.hasVisual(m) }).forEach({ m => game.addVisual(m) })
     }
 
@@ -78,18 +105,21 @@ object salidaVasosACasino {
     }
 }
 
-object escenarioVasos {
-    method salidas() = [salidaVasosACasino, encuentroNpcVasos]
+// ---------- mesa de los vasos ----------
+object escenarioVasos inherits Escenario {
+    override method imagen() = "casino/escenario-vasos.png"
+    override method cancion() = "sonidos/vasos.mp3"
+    override method salidas() = [salidaVasosACasino, encuentroNpcVasos]
 
-    method cargar() {
-        musica.cambiarA("sonidos/vasos.mp3") 
-        fondo.image("casino/escenario-vasos.png")
-        obstaculos.limpiar()
+    override method cargarObstaculos() {
         self.cargarParedes()
         self.cargarEscenario()
         self.cargarMesas()
         self.cargarBarra()
         self.cargarNpc()
+    }
+
+    override method alCargar() {
         [npcVasos].filter({ n => not game.hasVisual(n) }).forEach({ n => game.addVisual(n) })
     }
 
@@ -128,31 +158,26 @@ object escenarioVasos {
     }
 }
 
-// para los demás: la idea es que al momento de tocar ("interactuar") al crupier nos mande al otro tablero, de ese tablero no podemas salir. 
-// la unica manera seria "derrotarlo", que seria esquivando todas sus cartas hasta que no tenga más, ahi terminaría este mini juego. 
-// en donde podemos salir con mas o menos plata que al inicio. 
+// ---------- sala del jefe ----------
+// al tocar al crupier se pasa a este mapa y no se puede salir: la única forma es derrotarlo
+// esquivando todas sus cartas, y se sale con más o menos plata que al inicio.
+object escenarioPelea inherits Escenario {
+    override method imagen() = "casino/salon-casino-batalla.png"
+    override method cancion() = "sonidos/jefe-final.mp3"
+    override method salidas() = []
 
+    override method puedeCargar() = not lluviaDeCartas.estaJugando()
 
-object escenarioPelea {
-    method salidas() = []
-
-    method cargar() {
-        [lluviaDeCartas].filter({ l => not l.estaJugando() }).forEach({ l => self.prepararPelea() })
-    }
-
-    method prepararPelea() {
-        musica.cambiarA("sonidos/jefe-final.mp3") // estuve probando con un tema que tenia en mi compu XD, esta sujeto a cambios, es solo una prueba
-        fondo.image("casino/salon-casino-batalla.png")
-        obstaculos.limpiar()
+    override method cargarObstaculos() {
         obstaculos.bloquearZona(4, 11, 8, 11)
         self.cargarParedes()
         self.cargarMesas()
         self.cargarPlantas()
+    }
 
+    override method alCargar() {
         miniJefe.position(game.at(6, 8))
-
         [miniJefe].filter({ m => not game.hasVisual(m) }).forEach({ m => game.addVisual(m) })
-
         lluviaDeCartas.iniciar()
     }
 
@@ -181,13 +206,13 @@ object escenarioPelea {
     }
 }
 
-object escenarioDados {
-    method salidas() = [salidaDadosACasino]
+// ---------- mesa de dados ----------
+object escenarioDados inherits Escenario {
+    override method imagen() = "casino/tablero-dados.png"
+    override method cancion() = "sonidos/dados.mp3"
+    override method salidas() = [salidaDadosACasino]
 
-    method cargar() {
-        musica.cambiarA("sonidos/dados.mp3") 
-        fondo.image("casino/tablero-dados.png")
-        obstaculos.limpiar()
+    override method cargarObstaculos() {
         self.cargarParedes()
         self.cargarMesa()
         self.cargarPlantas()
@@ -245,23 +270,26 @@ object encuentroMiniJefe {
     }
 }
 
-object escenarioPlaza {
-    method salidas() = [salidaPlazaACasino, encuentroMonedaFuente]
+// ---------- plaza ----------
+object escenarioPlaza inherits Escenario {
+    override method imagen() = "casino/casino-plaza.png"
+    override method cancion() = "sonidos/viento.mp3"
+    override method salidas() = [salidaPlazaACasino, encuentroMonedaFuente]
 
-    method cargar() {
-        musica.cambiarA("sonidos/viento.mp3")
-        fondo.image("casino/casino-plaza.png")
-        obstaculos.limpiar()
+    override method cargarObstaculos() {
         self.cargarParedes()
         self.cargarOtrosObstaculos()
         self.cargarPlantas()
+    }
+
+    override method alCargar() {
         self.cargarMoneda()
     }
 
     method cargarMoneda() {
         [monedaFuente].filter({ m => billetera.necesitaMoneda() and not game.hasVisual(m) }).forEach({ m => m.aparecer() })
     }
-    
+
     method cargarParedes() {
         obstaculos.bloquearZona(0, 6, 10, 10) // pared superior, parte izquierda
         obstaculos.bloquearZona(9, 15, 10, 10) // pared superior, parte derecha
@@ -294,7 +322,6 @@ object escenarioPlaza {
         obstaculos.bloquearZona(12, 13, 7, 9) // farol der. arriba
         obstaculos.bloquearZona(13, 14, 2, 3) // farol der. abajo
     }
-    
 }
 
 object salidaCasinoAPlaza {
