@@ -101,7 +101,7 @@ object juegoVasos {
         game.addVisual(panelVasos)
         vasos.forEach({ v => game.addVisual(v) })
         game.addVisual(mensajeVasos)
-        mensajeVasos.text("Apostá: 1 = $50   2 = $100   3 = $200   (E cancela)")
+        mensajeVasos.text("Apostá: 1 = $50   2 = $100   3 = $200   (E cancelar)")
         fase = faseApuesta
     }
 
