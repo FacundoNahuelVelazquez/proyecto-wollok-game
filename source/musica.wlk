@@ -36,8 +36,8 @@ object musica {
     method reproducir(archivo) {
         self.detener()
         archivoActual = archivo
-        const nueva = game.sound(archivo)
-        nueva.shouldLoop(true)
+        const nueva = game.sound(archivo) // carga el sonido 
+        nueva.shouldLoop(true) // ni bien termina vuelve a empezar
         nueva.volume(volumen)
         pista = nueva
         game.schedule(500, { self.empezar(nueva) })
@@ -52,7 +52,7 @@ object musica {
         sonando = true
     }
 }
-/*
+
 
 
 // object musica {
@@ -70,37 +70,36 @@ object musica {
 // habria que agregar musica para vasos.wlk. jefe-final.wlk y dados.wlk 
 // prototipo de cancion para probar su funcionalidad
 
-object sinMusica {
-    method stop() {}
-    method volume(valor) {}
-}
+// object sinMusica {
+//     method stop() {}
+//     method volume(valor) {}
+// }
 
-object musica {
-    var pista = sinMusica
-    var archivoActual = ""
-    var volumen = 1
+// object musica {
+//     var pista = sinMusica
+//     var archivoActual = ""
+//     var volumen = 1
 
-    method iniciar() {
-        keyboard.up().onPressDo({ self.cambiarVolumen(1) })
-        keyboard.down().onPressDo({ self.cambiarVolumen(0) })
-    }
+//     method iniciar() {
+//         keyboard.up().onPressDo({ self.cambiarVolumen(1) })
+//         keyboard.down().onPressDo({ self.cambiarVolumen(0) })
+//     }
 
-    method cambiarVolumen(nuevo) {
-        volumen = nuevo
-        pista.volume(volumen)
-    }
+//     method cambiarVolumen(nuevo) {
+//         volumen = nuevo
+//         pista.volume(volumen)
+//     }
 
-    method cambiarA(archivo) {
-        [archivo].filter({ a => not (a == archivoActual) }).forEach({ a => self.reproducir(a) })
-    }
+//     method cambiarA(archivo) {
+//         [archivo].filter({ a => not (a == archivoActual) }).forEach({ a => self.reproducir(a) })
+//     }
 
-    method reproducir(archivo) {
-        archivoActual = archivo
-        pista.stop()
-        pista = game.sound(archivo)
-        pista.shouldLoop(true)
-        pista.volume(volumen)
-        game.schedule(500, { pista.play() })
-    }
-}
-*/
+//     method reproducir(archivo) {
+//         archivoActual = archivo
+//         pista.stop()
+//         pista = game.sound(archivo)
+//         pista.shouldLoop(true)
+//         pista.volume(volumen)
+//         game.schedule(500, { pista.play() })
+//     }
+// }

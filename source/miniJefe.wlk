@@ -48,5 +48,5 @@ object miniJefe {
         }
     }
 
-    method chocarConPersonaje() {}
+    method chocarConPersonaje() {} // sacar 
 }
