@@ -17,13 +17,13 @@ object dialogoIntermedio {
 object dialogoBuenasFichas {
     method aplica(saldo) = saldo > 500 and saldo < 1000
 
-    method texto() = "vamoooo te vas hacer rico como sigas asi"
+    method texto() = "vamos seguí así pero con cuidado"
 }
 
 object dialogoMuchasFichas {
     method aplica(saldo) = saldo >= 1000
 
-    method texto() = "robert recorda apostar con precaucion jeje :3"
+    method texto() = "robert has mejorado, pero tené precaución"
 }
 
 object npcVasos {
