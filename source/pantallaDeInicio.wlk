@@ -31,6 +31,7 @@ object casino inherits Pantalla {
     override method image() = "casino/casino-poster-inicio.png"
     override method position() = game.origin()
     override method siguiente() = pantallaControles
+
     override method alPresionarC() {
         self.irA(self.siguiente())
     }

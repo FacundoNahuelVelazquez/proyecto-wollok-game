@@ -51,7 +51,12 @@ object juego {
     }
     
     method cambiarDificultad() {
-        [casino].filter({ p => game.hasVisual(p) }).forEach({ p => dificultad.alternar() })
+        [casino].filter({ p => game.hasVisual(p) }).forEach({ p => self.activarDificil() })
+    }
+
+    method activarDificil() {
+        dificultad.alternar()
+        menuInicio.cambiarA(cinematica1)
     }
 
     method irA(escenario, posicionInicial) {
