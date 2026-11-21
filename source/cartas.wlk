@@ -94,13 +94,6 @@ class Carta inherits ObjetoLluvia {
 
     override method esquivada() {
         if (activo) {
-            billetera.premiarEsquivaCarta(
-                columna,
-                columnaPersonajeAlAparecer,
-                movimientosPersonajeAlAparecer,
-                personaje.position().x(),
-                personaje.cantidadMovimientos()
-            )
             self.retirar()
         }
     }

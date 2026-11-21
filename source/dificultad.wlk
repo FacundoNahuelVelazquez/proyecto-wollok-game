@@ -13,7 +13,7 @@ object modoNormal {
     method siguiente() = modoDificil
 
     method saldoInicial() = 100
-    method meta() = 2000
+    method meta() = 1000
     method fichasParaElJefe() = 500
 
     method intercambiosVasos() = 6
@@ -42,7 +42,7 @@ object modoDificil {
     method siguiente() = modoNormal
 
     method saldoInicial() = 100
-    method meta() = 2000
+    method meta() = 1500
     method fichasParaElJefe() = 800
 
     method intercambiosVasos() = 9

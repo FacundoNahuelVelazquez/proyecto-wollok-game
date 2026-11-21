@@ -27,10 +27,6 @@ object billetera {
         self.sumar(recompensaMoneda)
     }
 
-    method premiarEsquivaCarta(columnaCarta, columnaJugadorAlAparecer, movimientosAlAparecer, columnaJugadorActual, movimientosActuales) {
-        // sin premio por esquivar: la ganancia de la pelea es solo por segundo
-    }
-
     method puedeApostar(monto) = saldo >= monto
 
     method necesitaMoneda() = saldo < apuestaMinima
@@ -39,9 +35,9 @@ object billetera {
         saldo = saldo.max(apuestaMinima)
     }
 
-    method meta() = 1000
+    method meta(){}
 
-    method alcanzoLaMeta() = saldo >= self.meta()
+    method alcanzoLaMeta() = saldo >= dificultad.actual().meta()
 
     method estaEnQuiebra() = saldo == 0
 
