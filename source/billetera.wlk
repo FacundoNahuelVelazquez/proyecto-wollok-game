@@ -39,7 +39,7 @@ object billetera {
         saldo = saldo.max(apuestaMinima)
     }
 
-    method meta() = 2000
+    method meta() = 1000
 
     method alcanzoLaMeta() = saldo >= self.meta()
 

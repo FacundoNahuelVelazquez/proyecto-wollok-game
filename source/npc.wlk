@@ -15,15 +15,15 @@ object dialogoIntermedio {
 }
 
 object dialogoBuenasFichas {
-    method aplica(saldo) = saldo > 500 and saldo <= 1000
+    method aplica(saldo) = saldo > 500 and saldo < 1000
 
-    method texto() = "te alcanza para un guaymallen"
+    method texto() = "vamoooo te vas hacer rico como sigas asi"
 }
 
 object dialogoMuchasFichas {
-    method aplica(saldo) = saldo >= 1400
+    method aplica(saldo) = saldo >= 1000
 
-    method texto() = "segui asi robert! igual tene precaucion, no te vayas a quedar sin plata"
+    method texto() = "robert recorda apostar con precaucion jeje :3"
 }
 
 object npcVasos {
