@@ -6,15 +6,36 @@
 
 - Nehuen Rodriguez <br>
 - Facundo Velazquez <br>
-- Uriel Garay <br>
-- Lucas Mogro <br>
 - Jean-Paul Bittencourt
 
-## Capturas
+## Tableros
 
-<!-- <section align = "center", id = "controles">
-    <img src="casino-poster-game.png" width="500px" />   
-</section> <br> <br> -->
+<section align = "center", id = "controles">
+    <img src="assets/casino/casino-tablero.png" width="500px" />   
+</section> <br> <br> 
+<p align = "center">Tablero Inicial</p>
+<br><br>
+<section align = "center", id = "controles">
+    <img src="assets/casino/escenario-vasos.png" width="500px" />   
+</section> <br> <br> 
+<p align = "center">Tablero Vasos</p>
+<section align = "center", id = "controles">
+<br><br>
+    <img src="assets/casino/tablero-dados.png" width="500px" />   
+</section> <br> <br> 
+<p align = "center">Tablero Dados</p>
+<br><br>
+<section align = "center", id = "controles">
+    <img src="assets/casino/salon-casino-batalla.png" width="500px" />   
+</section> <br> <br> 
+<p align = "center">Tablero Del Crupier</p>
+<br><br>
+<section align = "center", id = "controles">
+    <img src="assets/casino/casino-plaza.png" width="500px" />   
+</section> <br> <br> 
+<p align = "center">Tablero Del Parque</p>
+
+
 
 ## Reglas de Juego / Instrucciones
 
@@ -77,19 +98,15 @@ Juego 3: Sigue el vaso.
 
 ## Personajes
 
-<!-- <section align = "center", id = "controles">
-    <img src="assets/robert/jugador-robert-sur-chiquito.png" width="500px" />   
-</section> <br> <br>  -->
-
-## Objetivos pendientes
-
-- Creditos del juego
-- Historia del juego;
-        - Definir  lore
-        - Implementarlo en imagenes y musica
-- Implementación del patio;
-        - Musica
-        - Mecanica de recuperacion de dinero
+<section align = "center", id = "controles">
+    <img src="assets/readme/Robert.png" width="500px" />   
+</section> <br> <br> 
+<p align = "center">Robert - Protagonista</p>
+<br><br>
+<section align = "center", id = "controles">
+    <img src="assets/readme/Crupier.png" width="500px" />   
+</section> <br> <br> 
+<p align = "center">Crupier - Villano</p>
 
 
 ## Otros
