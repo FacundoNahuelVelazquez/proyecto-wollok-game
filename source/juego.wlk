@@ -82,7 +82,7 @@ object juego {
     }
 
     method reiniciar() {
-        [pantallaGameOver].filter({ p => game.hasVisual(p) }).forEach({ p => self.volverAEmpezar() })
+        [self].filter({ j => menuInicio.pantallaFinalActiva() }).forEach({ j => self.volverAEmpezar() })
     }
 
     // ---------- victoria ----------
